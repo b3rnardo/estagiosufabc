@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="images/style.css" type="text/css" />
+  <title>Estágios</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+
+
+
+<div id="templatemo_body_wrapper">
+<div id="templatemo_wrapper">
+
+	<div id="tempaltemo_header">
+    	<span id="header_icon"></span>
+    	<div id="header_content">
+        	<div id="site_title">
+                  <p><b><h3>Sistema de gerenciamento de pedidos de estágio</h3></b></p>   </div>
+          <p>Sistema desenvolvido para auxiliar no processo de matrícula em estágios da licenciatura</p>
+		 
+		</div>
+    </div> <!-- end of header -->
+    
+    <div id="templatemo_main_top"></div>
+    <div id="templatemo_main"><span id="main_top"></span><span id="main_bottom"></span>
+    	
+        <div id="templatemo_sidebar">
+        
+        	<div id="templatemo_menu">
+        	<div id="templatemo_menu2">
+                <ul>
+                  <%if usuario_signed_in? %>
+                      <!-- Usuário logado -->
+                  <%else%>
+                      <!-- Usuário não logado -->
+                      <li><%= link_to"Logar" , "/estagios/usuarios/sign_in" %> </li>
+                      <li><%= link_to"Cadastrar novo usuário" , "/estagios/usuarios/sign_up" %> </li>    
+                  
+                  <%end%>
+                  
+                	
+            	</ul>    	
+            	</div>
+            </div> <!-- end of templatemo_menu -->
+        
+        	      
+            <div class="cleaner"></div>
+        </div> <!-- end of sidebar -->
+        
+        <div id="templatemo_content">
+       
+				 <div class="cleaner h30"></div>
+                
+          </div>
+        <div id="templatemo_content">
+        	
+            <div class="content_box">
+            	
+                <%= yield %>
+                
+              <div class="cleaner h30"></div>
+                
+          </div>
+            
+           
+        
+            <div class="content_box last_box">
+            	
+            </div>
+            
+        </div>
+        
+        <div class="cleaner"></div>    
+    </div>
+    
+    <div id="templatemo_main_bottom">
+    	
+    </div>
+
+</div> <!-- end of wrapper -->
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

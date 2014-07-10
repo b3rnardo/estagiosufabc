@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Detalhes:</b>
+  <%= @aviso.detalhes %>
+</p>
+
+<p>
+  <b>Autor:</b>
+  <%= @aviso.autor %>
+</p>
+
+<p>
+  <b>Titulo:</b>
+  <%= @aviso.titulo %>
+</p>
+
+<p>
+  <b>Data:</b>
+  <%= @aviso.data %>
+</p>
+
+
+<%= link_to 'Edit', edit_aviso_path(@aviso) %> |
+<%= link_to 'Back', avisos_path %>
