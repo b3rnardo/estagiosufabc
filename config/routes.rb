@@ -2,11 +2,28 @@ Estagio::Application.routes.draw do
   
   
 
-  
+
+
+
+
+
 scope 'estagios/' do
 
-    
-   devise_for :usuarios 
+      resources :disciplinas
+      resources :matriculas
+      resources :periodos
+      
+    devise_for :usuarios do
+    get 'logout' => 'sessions#destroy', :as => :destroy_user_session
+    get 'login' => 'devise/sessions#new'
+  end
+  
+      match '/cadastro', :controller => 'matriculas', :action => 'cadastro'
+      match '/cadastro/create', :controller => 'matriculas', :action => 'create'
+      match '/cadastro/email', :controller => 'matriculas', :action => 'email'
+      
+      match '/delete/disciplina/', :controller => 'disciplinas', :action => 'delete'
+      match 'delete/aviso', :controller => 'avisos', :action => 'delete'
       # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -62,7 +79,7 @@ scope 'estagios/' do
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
-   match ':controller(/:action(/:id))(.:format)'
+   #match ':controller(/:action(/:id))(.:format)'
     
    resources :avisos
     

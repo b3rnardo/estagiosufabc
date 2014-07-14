@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140710181350) do
+ActiveRecord::Schema.define(:version => 20140714152956) do
 
   create_table "avisos", :force => true do |t|
     t.string   "detalhes"
@@ -20,6 +20,38 @@ ActiveRecord::Schema.define(:version => 20140710181350) do
     t.date     "data"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "disciplinas", :force => true do |t|
+    t.string   "curso"
+    t.string   "codigo"
+    t.string   "nome"
+    t.string   "turno"
+    t.string   "dia"
+    t.time     "horario_inicio"
+    t.time     "horario_fim"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "matriculas", :force => true do |t|
+    t.integer  "disciplina_id"
+    t.integer  "aluno_id"
+    t.integer  "periodo_id"
+    t.integer  "situacao"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "periodos", :force => true do |t|
+    t.date     "matricula_inicio"
+    t.date     "matricula_fim"
+    t.date     "reajuste_inicio"
+    t.date     "reajuste_fim"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.string   "quadrimestre"
+    t.integer  "ano"
   end
 
   create_table "usuarios", :force => true do |t|
@@ -35,6 +67,11 @@ ActiveRecord::Schema.define(:version => 20140710181350) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "nome"
+    t.string   "tipo"
+    t.string   "ra"
+    t.string   "centro"
+    t.string   "telefone"
   end
 
   add_index "usuarios", ["email"], :name => "index_usuarios_on_email", :unique => true

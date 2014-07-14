@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Curso:</b>
+  <%= @disciplina.curso %>
+</p>
+
+<p>
+  <b>Codigo:</b>
+  <%= @disciplina.codigo %>
+</p>
+
+<p>
+  <b>Nome:</b>
+  <%= @disciplina.nome %>
+</p>
+
+<p>
+  <b>Turno:</b>
+  <%= @disciplina.turno %>
+</p>
+
+<p>
+  <b>Dia:</b>
+  <%= @disciplina.dia %>
+</p>
+
+<p>
+  <b>Horario inicio:</b>
+  <%= @disciplina.horario_inicio %>
+</p>
+
+<p>
+  <b>Horario fim:</b>
+  <%= @disciplina.horario_fim %>
+</p>
+
+
+<%= link_to 'Edit', edit_disciplina_path(@disciplina) %> |
+<%= link_to 'Back', disciplinas_path %>

@@ -1,0 +1,29 @@
+<h1>Listing periodos</h1>
+
+<table>
+  <tr>
+    <th>Matricula inicio</th>
+    <th>Matricula fim</th>
+    <th>Reajuste inicio</th>
+    <th>Reajuste</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @periodos.each do |periodo| %>
+  <tr>
+    <td><%= periodo.matricula_inicio %></td>
+    <td><%= periodo.matricula_fim %></td>
+    <td><%= periodo.reajuste_inicio %></td>
+    <td><%= periodo.reajuste %></td>
+    <td><%= link_to 'Show', periodo %></td>
+    <td><%= link_to 'Edit', edit_periodo_path(periodo) %></td>
+    <td><%= link_to 'Destroy', periodo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Periodo', new_periodo_path %>

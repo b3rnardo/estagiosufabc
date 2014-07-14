@@ -2,8 +2,27 @@ class AvisosController < ApplicationController
   # GET /avisos
   # GET /avisos.json
   
+    def realizou_matricula()
+      @matriculas = Matricula.find(:all, :conditions => {:aluno_id => current_usuario.id, :periodo_id => Periodo.find(:last).id})
+      
+      if @matriculas.blank?
+          #não realizou matrícula no período atual
+          return false
+      else
+          #realizou a matrícula no período atual
+          return true
+      end
+  end
+  
   before_filter :authenticate_usuario!#, :except=>[:show]
   def index
+    
+    @realizou_matricula = false
+    if current_usuario.tipo == "Aluno"
+        if realizou_matricula()
+            @realizou_matricula = true
+        end
+    end
     @avisos = Aviso.all
 
     respond_to do |format|
@@ -43,10 +62,11 @@ class AvisosController < ApplicationController
   # POST /avisos.json
   def create
     @aviso = Aviso.new(params[:aviso])
-
+    @hoje = Date.current
+    @aviso.data = @hoje
     respond_to do |format|
       if @aviso.save
-        format.html { redirect_to @aviso, notice: 'Aviso was successfully created.' }
+        format.html { redirect_to @aviso, notice: 'Aviso criado com sucesso.' }
         format.json { render json: @aviso, status: :created, location: @aviso }
       else
         format.html { render action: "new" }
@@ -73,7 +93,7 @@ class AvisosController < ApplicationController
 
   # DELETE /avisos/1
   # DELETE /avisos/1.json
-  def destroy
+  def delete
     @aviso = Aviso.find(params[:id])
     @aviso.destroy
 

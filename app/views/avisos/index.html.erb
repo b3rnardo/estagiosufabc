@@ -1,29 +1,29 @@
-<h1>Listing avisos</h1>
+<br><br>
+<% if flash[:notice]%>
+<p class="flash-notice"><font color = "green"><%= flash[:notice] %></font></p>
+  <% end %>
+<% if @realizou_matricula%>
+<p><%= link_to 'Enviar matrículas por email', :controller => 'matriculas', :action => 'email'%> </p>
+<%end%>
 
-<table>
-  <tr>
-    <th>Detalhes</th>
-    <th>Autor</th>
-    <th>Titulo</th>
-    <th>Data</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<h1>Avisos</h1>
+
+
+
+
 
 <% @avisos.each do |aviso| %>
-  <tr>
-    <td><%= aviso.detalhes %></td>
-    <td><%= aviso.autor %></td>
-    <td><%= aviso.titulo %></td>
-    <td><%= aviso.data %></td>
-    <td><%= link_to 'Show', aviso %></td>
-    <td><%= link_to 'Edit', edit_aviso_path(aviso) %></td>
-    <td><%= link_to 'Destroy', aviso, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+<h3> <%=aviso.titulo%></h3>
+<%=aviso.detalhes%>
+</br><span><b>postado por  <%= aviso.autor %> em <%= aviso.updated_at.to_s_br %> </b></span>
+    	<%= link_to 'Editar', edit_aviso_path(aviso) %>
+        <%= link_to 'Deletar', :controller => 'avisos', :action => 'delete', :id => aviso.id%>
+    	
+<br>
+<br>
 <% end %>
-</table>
+
 
 <br />
 
-<%= link_to 'New Aviso', new_aviso_path %>
+<%= link_to 'Novo aviso', new_aviso_path %>

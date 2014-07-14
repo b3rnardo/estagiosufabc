@@ -11,22 +11,19 @@
     </div>
   <% end %>
 
+
   <div class="field">
-    <%= f.label :detalhes %><br />
-    <%= f.text_field :detalhes %>
-  </div>
-  <div class="field">
-    <%= f.label :autor %><br />
-    <%= f.text_field :autor %>
+    <%= f.hidden_field :autor, :value => current_usuario.nome %>
   </div>
   <div class="field">
     <%= f.label :titulo %><br />
     <%= f.text_field :titulo %>
   </div>
   <div class="field">
-    <%= f.label :data %><br />
-    <%= f.date_select :data %>
+    <%= f.label :detalhes %><br />
+    <%= f.text_field :detalhes %>
   </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

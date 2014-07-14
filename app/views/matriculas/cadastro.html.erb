@@ -1,0 +1,42 @@
+<h1>Disciplinas ofertadas</h1>
+
+<%= form_for(:disciplinas, :url => {:controller => 'matriculas', :action =>'create'}) do |f| %>
+<table>
+  <tr>
+
+
+    <th></th>
+    <th>Codigo</th>
+    <th>Nome</th>
+    <th>Turno</th>
+    <th>Dia</th>
+    <th>Horario inicio</th>
+    <th>Horario fim</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @disciplinas.each do |disciplina| %>
+  <tr>
+
+    <td>
+    <%= check_box_tag "disciplinas[]", disciplina.id, (checked = true if disciplina_escolhida(disciplina.id))%> </td>
+
+    <td><%= disciplina.codigo %></td>
+    <td><%= disciplina.nome %></td>
+    <td><%= disciplina.turno %></td>
+    <td><%= disciplina.dia %></td>
+    <td><%= I18n.l disciplina.horario_inicio, :format => :hora %></td>
+    <td><%= I18n.l disciplina.horario_fim, :format => :hora %></td>
+    </tr>  
+    <%end%>
+  
+</table>
+
+<%= f.submit "salvar"%>
+<br />
+
+<%end%>
+
+

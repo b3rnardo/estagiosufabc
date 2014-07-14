@@ -1,0 +1,43 @@
+<h1>Disciplinas cadastradas</h1>
+
+<table>
+  <tr>
+    <% if current_usuario.tipo == "Aluno"%>
+        <th></th>
+    <%end%>
+    
+ <!--   <th>Curso</th> -->
+    <th>Codigo</th>
+    <th>Nome</th>
+    <th>Turno</th>
+    <th>Dia</th>
+    <th>Horario inicio</th>
+    <th>Horario fim</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @disciplinas.each do |disciplina| %>
+  <tr>
+    <%if current_usuario.tipo == "Aluno"%>
+        <td><%= check_box_tag(disciplina.id) %></td>
+    <%end%>
+    
+ <!--   <td><%= disciplina.curso %></td> -->
+    <td><%= disciplina.codigo %></td>
+    <td><%= disciplina.nome %></td>
+    <td><%= disciplina.turno %></td>
+    <td><%= disciplina.dia %></td>
+    <td><%= I18n.l disciplina.horario_inicio, :format => :hora %></td>
+    <td><%= I18n.l disciplina.horario_fim, :format => :hora %></td>
+    <td><%= link_to 'Show', disciplina %></td>
+    <td><%= link_to 'Edit', edit_disciplina_path(disciplina) %></td>
+    <td><%= link_to 'Deletar', :controller => 'disciplinas', :action => 'delete', :id => disciplina.id %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Disciplina', new_disciplina_path %>

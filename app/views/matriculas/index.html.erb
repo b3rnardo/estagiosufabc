@@ -1,0 +1,27 @@
+<h1>Matrículas</h1>
+
+<table>
+  <tr>
+    <th>Código</th>
+    <th>Disciplina</th>
+    <% unless current_usuario.tipo == "Aluno" %>
+        <th>Aluno</th>
+    <%end%>
+    <th>Situacao</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @matriculas.each do |matricula| %>
+  <tr>
+    <td><%= retorna_codigo(matricula.disciplina_id)%></td>
+    <td><%= retorna_nome(matricula.disciplina_id) %></td>
+    <td><%= matricula.situacao %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+

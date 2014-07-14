@@ -1,0 +1,43 @@
+<%= form_for(@periodo) do |f| %>
+  <% if @periodo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@periodo.errors.count, "error") %> prohibited this periodo from being saved:</h2>
+
+      <ul>
+      <% @periodo.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :período %><br />
+    <%= f.select :quadrimestre, [["1º quadrimestre"],["2º quadrimestre"],["3º quadrimestre"]] %>
+  </div>
+
+  <div class="field">
+    <%= f.label :ano %><br />
+    <%= f.text_field :ano, :size => 8%>
+  </div>
+
+  <div class="field">
+    <%= f.label :matricula_inicio %><br />
+    <%= f.date_select :matricula_inicio %>
+  </div>
+  <div class="field">
+    <%= f.label :matricula_fim %><br />
+    <%= f.date_select :matricula_fim %>
+  </div>
+  <div class="field">
+    <%= f.label :reajuste_inicio %><br />
+    <%= f.date_select :reajuste_inicio %>
+  </div>
+  <div class="field">
+    <%= f.label :reajuste_fim %><br />
+    <%= f.date_select :reajuste_fim %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
