@@ -20,10 +20,11 @@ scope 'estagios/' do
   
       match '/cadastro', :controller => 'matriculas', :action => 'cadastro'
       match '/cadastro/create', :controller => 'matriculas', :action => 'create'
-      match '/cadastro/email', :controller => 'matriculas', :action => 'email'
+      match '/email/matriculas', :controller => 'matriculas', :action => 'email_matriculas'
       
       match '/delete/disciplina/', :controller => 'disciplinas', :action => 'delete'
       match 'delete/aviso', :controller => 'avisos', :action => 'delete'
+      match 'delete/periodo', :controller => 'periodos', :action => 'delete'
       # The priority is based upon order of creation:
   # first created -> highest priority.
 

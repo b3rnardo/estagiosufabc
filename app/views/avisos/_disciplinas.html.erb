@@ -1,0 +1,24 @@
+<table>
+  <tr>
+    <th>Código</th>
+    <th>Disciplina</th>
+    <th>Turno</th>
+    <th>Dia</th>
+    <th>Horário</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @matriculas.each do |matricula| %>
+  <tr>
+    <td><%= retorna_codigo(matricula.disciplina_id)%></td>
+    <td><%= retorna_nome(matricula.disciplina_id) %></td>
+    <td><%= retorna_turno(matricula.disciplina_id) %></td>
+    <td><%= retorna_dia(matricula.disciplina_id) %></td>
+    <td>das <%= I18n.l retorna_horario_inicio(matricula.disciplina_id), :format => :hora%> às <%= I18n.l retorna_horario_fim(matricula.disciplina_id), :format => :hora%></td>
+  </tr>
+<% end %>
+</table>
+
+<br />

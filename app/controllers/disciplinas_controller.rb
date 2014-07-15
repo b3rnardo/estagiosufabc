@@ -3,7 +3,16 @@ class DisciplinasController < ApplicationController
   # GET /disciplinas.json
   before_filter :authenticate_usuario!#, :except=>[:show]
   def index
-    @disciplinas = Disciplina.all
+    
+    
+    @periodo = Periodo.find(:last)
+    unless @periodo.blank?
+      @disciplinas = Disciplina.find(:all, :conditions => {:periodo_id => @periodo.id})
+      @titulo = "Disciplinas ofertadas para o "+@periodo.quadrimestre.to_s+" de "+@periodo.ano.to_s
+    else
+      @titulo = t(:semperiodo) #"Nenhum período cadastrado"
+    end
+    
 
     respond_to do |format|
       format.html # index.html.erb
@@ -42,6 +51,7 @@ class DisciplinasController < ApplicationController
   # POST /disciplinas.json
   def create
     @disciplina = Disciplina.new(params[:disciplina])
+    @disciplina.periodo_id = Periodo.find(:last).id
 
     respond_to do |format|
       if @disciplina.save

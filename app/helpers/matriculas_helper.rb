@@ -2,7 +2,7 @@ module MatriculasHelper
   
   def disciplina_escolhida(id_da_disciplina) 
     #inicia o checkbox se o aluno escolheu a disciplina
-    @matricula = Matricula.find(:first, :conditions =>{:disciplina_id => id_da_disciplina, :periodo_id => Periodo.find(:last).id, :aluno_id => current_usuario.id})
+    @matricula = Matricula.find(:first, :conditions =>{:disciplina_id => id_da_disciplina,  :aluno_id => current_usuario.id})
     if @matricula.blank?
       return false
     else
@@ -10,10 +10,22 @@ module MatriculasHelper
     end
   end
   
+  def retorna_horario_disciplina(id_do_periodo)
+    #@periodo = Periodo
+  end
+  
+  def retorna_nome_aluno(id_do_aluno)
+    @aluno = Usuario.find(id_do_aluno).nome
+  end
+  
+  def retorna_ra(id_do_aluno)
+    @aluno = Usuario.find(id_do_aluno).ra
+  end
+  
   def retorna_codigo(id_da_disciplina)
     @disciplina = Disciplina.find(id_da_disciplina) 
     if @disciplina.blank?
-      @retornar = "Disciplina excluida"
+      @retornar = "-"
     else
       @retornar = @disciplina.codigo
     end
@@ -24,9 +36,49 @@ module MatriculasHelper
     @disciplina = Disciplina.find(id_da_disciplina) 
     
     if @disciplina.blank?
-      @retornar = "Disciplina excluida"
+      @retornar = "-"
     else
       @retornar = @disciplina.nome
+    end
+  end
+  
+    def retorna_turno(id_da_disciplina)
+    @disciplina = Disciplina.find(id_da_disciplina) 
+    
+    if @disciplina.blank?
+      @retornar = "-"
+    else
+      @retornar = @disciplina.turno
+    end
+  end
+  
+    def retorna_dia(id_da_disciplina)
+    @disciplina = Disciplina.find(id_da_disciplina) 
+    
+    if @disciplina.blank?
+      @retornar = "-"
+    else
+      @retornar = @disciplina.dia
+    end
+  end
+  
+    def retorna_horario_inicio(id_da_disciplina)
+    @disciplina = Disciplina.find(id_da_disciplina) 
+    
+    if @disciplina.blank?
+      @retornar = "-"
+    else
+      @retornar = @disciplina.horario_inicio
+    end
+  end
+  
+    def retorna_horario_fim(id_da_disciplina)
+    @disciplina = Disciplina.find(id_da_disciplina) 
+    
+    if @disciplina.blank?
+      @retornar = "-"
+    else
+      @retornar = @disciplina.horario_fim
     end
   end
   

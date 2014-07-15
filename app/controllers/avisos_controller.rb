@@ -3,7 +3,7 @@ class AvisosController < ApplicationController
   # GET /avisos.json
   
     def realizou_matricula()
-      @matriculas = Matricula.find(:all, :conditions => {:aluno_id => current_usuario.id, :periodo_id => Periodo.find(:last).id})
+      @matriculas = Matricula.find(:all, :conditions => {:aluno_id => current_usuario.id})
       
       if @matriculas.blank?
           #não realizou matrícula no período atual
@@ -21,6 +21,7 @@ class AvisosController < ApplicationController
     if current_usuario.tipo == "Aluno"
         if realizou_matricula()
             @realizou_matricula = true
+            @matriculas = Matricula.find(:all, :conditions => {:aluno_id => current_usuario.id})
         end
     end
     @avisos = Aviso.all

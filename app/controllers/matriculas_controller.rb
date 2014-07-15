@@ -3,8 +3,11 @@ class MatriculasController < ApplicationController
   # GET /matriculas.json
   before_filter :authenticate_usuario!#, :except=>[:show]
 
-  def email
-    
+  def email_matriculas
+      @matriculas = Matricula.find(:all, :conditions => {:aluno_id => current_usuario.id, :periodo_id => Periodo.find(:last).id})
+      UserMailer.matriculas(Usuario.find(current_usuario.id),@matriculas).deliver
+      redirect_to :back
+      flash[:notice] = t(:emailenviado)
   end
   
   def cadastro
@@ -68,8 +71,8 @@ class MatriculasController < ApplicationController
     @disciplinas = params[:disciplinas] 
     controle = false
     @disciplinas.each do |disciplina|
-      @matricula = Matricula.new :disciplina_id => disciplina, :aluno_id => current_usuario.id,
-        :periodo_id => Periodo.find(:last).id
+      @matricula = Matricula.new :disciplina_id => disciplina, :aluno_id => current_usuario.id
+        
       unless @matricula.save
           controle = true
           break

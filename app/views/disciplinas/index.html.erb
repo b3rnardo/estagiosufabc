@@ -1,4 +1,4 @@
-<h1>Disciplinas cadastradas</h1>
+<h1><%= @titulo%></h1>
 
 <table>
   <tr>
@@ -19,6 +19,8 @@
   </tr>
 
 <% @disciplinas.each do |disciplina| %>
+  
+  <%unless disciplina.blank?%>
   <tr>
     <%if current_usuario.tipo == "Aluno"%>
         <td><%= check_box_tag(disciplina.id) %></td>
@@ -31,13 +33,14 @@
     <td><%= disciplina.dia %></td>
     <td><%= I18n.l disciplina.horario_inicio, :format => :hora %></td>
     <td><%= I18n.l disciplina.horario_fim, :format => :hora %></td>
-    <td><%= link_to 'Show', disciplina %></td>
-    <td><%= link_to 'Edit', edit_disciplina_path(disciplina) %></td>
+    <td><%= link_to 'Detalhes', disciplina %></td>
+    <td><%= link_to 'Editar', edit_disciplina_path(disciplina) %></td>
     <td><%= link_to 'Deletar', :controller => 'disciplinas', :action => 'delete', :id => disciplina.id %></td>
   </tr>
+<% end%>  
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Disciplina', new_disciplina_path %>
+<%= link_to 'Nova Disciplina', new_disciplina_path %>

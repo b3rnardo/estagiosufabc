@@ -22,9 +22,20 @@
   </div>
 
   <div class="field">
+    <%= f.label :inicio_do_cadastro_de_disciplinas %><br />
+    <%= f.date_select :cadastro_inicio %>
+  </div>
+
+  <div class="field">
+    <%= f.label :fim_do_cadastro_de_disciplinas %><br />
+    <%= f.date_select :cadastro_fim %>
+  </div>
+
+  <div class="field">
     <%= f.label :matricula_inicio %><br />
     <%= f.date_select :matricula_inicio %>
   </div>
+
   <div class="field">
     <%= f.label :matricula_fim %><br />
     <%= f.date_select :matricula_fim %>

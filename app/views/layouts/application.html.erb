@@ -37,25 +37,31 @@
                       <!-- Usuário logado -->
                       
                       <% if current_usuario.tipo == "Administrador"%>
-                      <li><%=link_to "Definir período", "/estagios/periodos"%></li>
-                      <li><%= link_to "Disciplinas", "/estagios/disciplinas"%></li>
-                          <li><h1>Analisar pedidos de matrícula</h1></li>
+                          <li><%=link_to "Definir período", "/estagios/periodos"%></li>
+                          <% if periodo_editar_disciplina() %>
+                              <li><%= link_to "Editar disciplinas", "/estagios/disciplinas"%></li>
+                          <% else %>
+                              <li><h1>Editar disciplinas</h1></li>
+                          <% end %>
+                          
+                          <li><%= link_to "Analisar pedidos de matrícula", "/estagios/matriculas"%></li>
                           <li><h1>Visualizar matrículas</h1></li>                          
                           <li><h1>Editar usuários</h1></li>
                           
                        
                           
                       <% elsif current_usuario.tipo == "Secretaria"%>
-                          <li><%= link_to "Disciplinas", "/estagios/disciplinas"%></li>
-                          <li><h1>Analisar pedidos de matrícula</h1></li>
+                          <li><%=link_to "Avisos", "/estagios"%></li>
+                          <li><%= link_to "Cadastrar disciplinas", "/estagios/disciplinas"%></li>
+                          <li><%= link_to "Analisar pedidos de matrícula", "/estagios/matriculas"%></li>
                           <li><h1>Visualizar matrículas</h1></li>
                       
                       <%elsif current_usuario.tipo == "Aluno"%>
-                            <li><h1>Avisos</h1></li>
+                            <li><%=link_to "Avisos", "/estagios"%></li>
                             <%if periodo_de_matricula()%>
-                                <li><%= link_to "Matrícula", "/estagios/cadastro"%></li>
+                                <li><%= link_to "Realizar matrícula", "/estagios/cadastro"%></li>
                             <%else%>
-                                <li><h1>Matrícula</h1></li>
+                                <li><h1>Realizar matrícula</h1></li>
                             <%end%>                         
 
                       <%end%>   

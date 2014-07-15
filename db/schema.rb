@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140714152956) do
+ActiveRecord::Schema.define(:version => 20140715173030) do
 
   create_table "avisos", :force => true do |t|
     t.string   "detalhes"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20140714152956) do
     t.time     "horario_fim"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.integer  "periodo_id"
   end
 
   create_table "matriculas", :force => true do |t|
@@ -52,6 +53,8 @@ ActiveRecord::Schema.define(:version => 20140714152956) do
     t.datetime "updated_at",       :null => false
     t.string   "quadrimestre"
     t.integer  "ano"
+    t.date     "cadastro_inicio"
+    t.date     "cadastro_fim"
   end
 
   create_table "usuarios", :force => true do |t|

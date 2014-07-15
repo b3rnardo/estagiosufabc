@@ -49,6 +49,8 @@ pt-BR:
   arquivo_csv: O arquivo deve estar no formato.csv
   nao_disponivel: Não disponível
   não_atribuida: Não atribuída
+  emailenviado: Email enviado com sucesso!
+  semperiodo: Disciplinas cadastradas
   
   
   
@@ -251,7 +253,7 @@ pt-BR:
       default: ! '%A, %d de %B de %Y, %H:%M h'
       long: ! '%A, %d de %B de %Y, %H:%M h'
       short: ! '%d/%m, %H:%M h'
-      hora: ! '%H:%M'
+      hora: ! '%Hh:%M'
     pm: ''
   # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
   activemodel:

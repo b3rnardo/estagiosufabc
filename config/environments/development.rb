@@ -35,7 +35,22 @@ Estagio::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
   
-   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+   config.action_mailer.default_url_options = { :host => 'cmcc-bcc.ufabc.edu.br/estagios' }
+   
+config.action_mailer.delivery_method = :smtp
+config.action_mailer.smtp_settings = {
+  :address              => "smtp.gmail.com",
+  :port                 => 587,
+  :domain               => 'gmail.com',
+  :user_name            => 'estagios.licenciaturaufabc@gmail.com',
+  :password             => 'aa/93K+-+',
+  :authentication       => 'plain',
+  :enable_starttls_auto => true 
+}
+# Para debug apenas, é melhor que a linha abaixo seja adicionado apenas no ambiente de desenvolvimento
+config.action_mailer.raise_delivery_errors = true
+    
+
    
 
 end

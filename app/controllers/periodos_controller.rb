@@ -41,10 +41,26 @@ class PeriodosController < ApplicationController
   # POST /periodos
   # POST /periodos.json
   def create
+    @periodos = Periodo.all
     @periodo = Periodo.new(params[:periodo])
 
-    respond_to do |format|
+    respond_to do |format|     
+      
       if @periodo.save
+        
+        unless @periodos.blank?
+          i = @periodos.length
+          @disciplinas = Disciplina.find(:all, :conditions => {:periodo_id => @periodos[i-1].id})
+          @disciplinas.each do |disc|
+            @new_disciplina = Disciplina.new :curso => disc.curso, :codigo => disc.codigo, :nome => disc.nome,
+              :turno => disc.turno, :dia => disc.dia, :horario_inicio => disc.horario_inicio, 
+              :horario_fim => disc.horario_fim
+            @new_disciplina.periodo_id = Periodo.find(:last).id
+            @new_disciplina.save
+          end
+        end
+        
+        
         format.html { redirect_to @periodo, notice: 'Periodo was successfully created.' }
         format.json { render json: @periodo, status: :created, location: @periodo }
       else
@@ -72,10 +88,20 @@ class PeriodosController < ApplicationController
 
   # DELETE /periodos/1
   # DELETE /periodos/1.json
-  def destroy
+  def delete
     @periodo = Periodo.find(params[:id])
-    @periodo.destroy
+    @matriculas = Matricula.find(:all, :conditions =>{:periodo_id => @periodo.id})
+    @matriculas.each do |matricula|
+      matricula.destroy
+    end
+    
+    
+    @disciplinas = Disciplina.find(:all, :conditions =>{:periodo_id => @periodo.id})
+    @disciplinas.each do |disciplina|
+      disciplina.destroy
+    end   
 
+    @periodo.destroy
     respond_to do |format|
       format.html { redirect_to periodos_url }
       format.json { head :no_content }
