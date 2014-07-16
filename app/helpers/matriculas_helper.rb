@@ -1,5 +1,24 @@
 module MatriculasHelper
   
+  def filtro_centro(matricula)
+    #checa se a disciplina é do centro
+    @retornar = false
+    @matricula = matricula
+    @disciplina = Disciplina.find(@matricula.disciplina_id)
+    
+    if current_usuario.centro == "CMCC"
+      
+        if @disciplina.curso == t(:lic_ciencia_bio) #"Licenciatura em ciências biológicas"
+            #teste, atualizar
+            @retornar = true
+        
+        end
+      
+    end
+    
+    @retornar
+  end
+  
   def disciplina_escolhida(id_da_disciplina) 
     #inicia o checkbox se o aluno escolheu a disciplina
     @matricula = Matricula.find(:first, :conditions =>{:disciplina_id => id_da_disciplina,  :aluno_id => current_usuario.id})

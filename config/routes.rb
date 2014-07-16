@@ -9,9 +9,7 @@ Estagio::Application.routes.draw do
 
 scope 'estagios/' do
 
-      resources :disciplinas
-      resources :matriculas
-      resources :periodos
+
       
     devise_for :usuarios do
     get 'logout' => 'sessions#destroy', :as => :destroy_user_session
@@ -21,6 +19,7 @@ scope 'estagios/' do
       match '/cadastro', :controller => 'matriculas', :action => 'cadastro'
       match '/cadastro/create', :controller => 'matriculas', :action => 'create'
       match '/email/matriculas', :controller => 'matriculas', :action => 'email_matriculas'
+      match '/matriculas/analise/:id', :controller => 'matriculas', :action => 'analise'
       
       match '/delete/disciplina/', :controller => 'disciplinas', :action => 'delete'
       match 'delete/aviso', :controller => 'avisos', :action => 'delete'
@@ -74,6 +73,11 @@ scope 'estagios/' do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
+  
+      resources :disciplinas
+      resources :matriculas
+      resources :periodos
+      
   root :to => 'avisos#index'
 
   # See how all your routes lay out with "rake routes"

@@ -12,15 +12,21 @@ class MatriculasController < ApplicationController
   
   def cadastro
     @disciplinas = Disciplina.all
+    @periodo = Periodo.find(:last)
   end
   
   def index
-    if current_usuario.tipo == "Aluno"
-      @matriculas = Matricula.find(:all, :conditions => {:aluno_id => current_usuario.id, :periodo_id => Periodo.find(:last).id})
-    else
-      # o usuário é secretaria/administrador
-      @matriculas = Matricula.all
-    end
+    
+    @periodo = Periodo.find(:last)
+    
+    unless @periodo.blank?
+        @matriculas = Matricula.find(:all, :conditions =>{:periodo_id => @periodo.id})
+    end  
+          
+
+    
+      
+
     
 
     respond_to do |format|
@@ -71,7 +77,7 @@ class MatriculasController < ApplicationController
     @disciplinas = params[:disciplinas] 
     controle = false
     @disciplinas.each do |disciplina|
-      @matricula = Matricula.new :disciplina_id => disciplina, :aluno_id => current_usuario.id
+      @matricula = Matricula.new :disciplina_id => disciplina, :aluno_id => current_usuario.id, :periodo_id => Periodo.find(:last).id, :status => 0
         
       unless @matricula.save
           controle = true
@@ -93,18 +99,24 @@ class MatriculasController < ApplicationController
 
   # PUT /matriculas/1
   # PUT /matriculas/1.json
-  def update
+  def analise
     @matricula = Matricula.find(params[:id])
+    @teste = params[:matricula]
+    
+    
 
-    respond_to do |format|
+
       if @matricula.update_attributes(params[:matricula])
-        format.html { redirect_to @matricula, notice: 'Matricula was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @matricula.errors, status: :unprocessable_entity }
+            UserMailer.analise_matricula(@matricula).deliver
+            @matricula.status = 1
+            @matricula.save
+            flash[:notice] = t(:analise_realizada)
+
+      
+      else                
+            flash[:erro] = t(:erro_analise)
       end
-    end
+      redirect_to :back
   end
 
   # DELETE /matriculas/1

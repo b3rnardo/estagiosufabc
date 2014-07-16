@@ -3,7 +3,7 @@ pt-BR:
   pedido_encaminhado: Seu pedido foi encaminhado com sucesso! Aguarde um e-mail confirmando a aprovação.
   pedido_sendo_processado: Seu pedido ainda está em processo.
   analise_realizada: Análise realizada com sucesso! 
-  erro_analise: Houve um erro no envio da análise!
+  erro_analise: Houve um erro no envio da análise! Por favor, cheque os campos e tente novamente.
   avaliacao_sucesso: Avaliação realizada com sucesso!
   arquivo_vazio: O relatório não foi anexado.
   erro_atualizar_projeto: Não foi possível atualizar o projeto. 
@@ -51,6 +51,7 @@ pt-BR:
   não_atribuida: Não atribuída
   emailenviado: Email enviado com sucesso!
   semperiodo: Disciplinas cadastradas
+  lic_ciencia_bio: Licenciatura em ciências biológicas
   
   
   

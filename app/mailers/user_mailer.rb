@@ -4,6 +4,13 @@ class UserMailer < ActionMailer::Base
   include ApplicationHelper
   include MatriculasHelper
   
+  def analise_matricula(matricula)    
+    @matricula = matricula
+    @aluno = Usuario.find(@matricula.aluno_id)
+    @disciplina = Disciplina.find(@matricula.disciplina_id)
+    mail(:to => "bernardo_mec@live.com", :subject => "Analise da matricula")
+  end
+  
   def matriculas(usuario,matriculas)
     @hoje = I18n.l Time.now
     @usuario = usuario
