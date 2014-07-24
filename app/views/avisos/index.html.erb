@@ -1,13 +1,20 @@
-<br>
 <% if flash[:notice]%>
 <p class="flash-notice"><font color = "green"><%= flash[:notice] %></font></p>
   <% end %>
+
+<% if flash[:erro]%>
+<p class="flash-notice"><font color = "red"><%= flash[:erro] %></font></p>
+  <% end %>
+
+
 <% if @realizou_matricula%>
 
-<p>Você solicitou matrícula nas seguintes disciplinas:</p>
+<p>Você solicitou matrícula nas seguintes disciplinas:</p> 
 
 <%= render 'disciplinas' %>
 
+<p><b>Caso queira enviar uma mensagem e/ou um arquivo anexo para a secretaria com informações adicionais
+ sobre a matrícula na disciplina, preencha o os campos e clique em 'enviar'.</b></p>
 <p><%= link_to 'Enviar matrículas por email', :controller => 'matriculas', :action => 'email_matriculas'%> </p>
 <%end%>
 <br>

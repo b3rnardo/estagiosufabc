@@ -52,7 +52,20 @@ pt-BR:
   emailenviado: Email enviado com sucesso!
   semperiodo: Disciplinas cadastradas
   lic_ciencia_bio: Licenciatura em ciências biológicas
-  
+  lic_filosofia: Licenciatura em filosofia
+  lic_fisica: Licenciatura em física
+  lic_matematica: Licenciatura em matemática
+  lic_quimica: Licenciatura em química
+  erro_matricula: Uma ou mais disciplinas não puderam ser salvas devido à conflito de horários. Cheque suas escolhas e tente novamente
+  anexo_enviado: mensagem e/ou anexo enviados com sucesso!
+  anexo_erro: Houve um erro em sua solicitação. Certifique-se que o arquivo está em formato .PDF e tente novamente. Caso o erro persista, contate o administrador do sistema.
+  conceito_enviado: Conceito enviado com sucesso!
+  erro_conceito: Houve um erro em sua solicitação. Por favor, tente novamente. Caso o erro persista, contate o administrador do sistema
+  lancamento_conceito: Lançamento de conceitos
+  erro_curso: Por favor, informe ao menos um dos cursos apresentados.
+  q1: 1º quadrimestre
+  q2: 2º quadrimestre
+  q3: 3º quadrimestre
   
   
   date:
@@ -263,9 +276,13 @@ pt-BR:
   activerecord:
     models:
         user: usuário        
-    attributes:                
+    attributes: 
+        periodo:
+            matricula_inicio: início do período de matrícula
+            reajuste_inicio: início do período de reajuste
+            cadastro_inicio: início do período de edição de disciplinas
         duedate:        
-                matricula_inicio: início do pedido de matrícula
+                matricula_inicio: início do período de matrícula
                 matricula_fim: fim do pedido de matrícula
                 orientation_end: entrega do formulário de orientação
                 evaluation_end: entrega da avaliação parcial
@@ -303,6 +320,14 @@ pt-BR:
             
     errors:
       models:
+          periodo:
+            attributes:
+                matricula_inicio:
+                    periodo_matricula_invalido: não pode ser maior que o campo "fim do período de matrícula".
+                reajuste_inicio:
+                    periodo_reajuste_invalido: não pode ser maior que o campo "fim do período de reajuste".
+                cadastro_inicio:
+                    periodo_cadastro_invalido: não pode ser maior que o campo "fim do período de edição de disciplinas".
           mudanca:
               attributes:
                   codigo_covalidacao:

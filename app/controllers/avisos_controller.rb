@@ -2,6 +2,8 @@ class AvisosController < ApplicationController
   # GET /avisos
   # GET /avisos.json
   
+    before_filter :authenticate_usuario!#, :except=>[:show]
+  
     def realizou_matricula()
       @periodo = Periodo.find(:last)
       unless @periodo.blank?
@@ -22,7 +24,7 @@ class AvisosController < ApplicationController
 
   end
   
-  before_filter :authenticate_usuario!#, :except=>[:show]
+
   def index
     
     @realizou_matricula = false

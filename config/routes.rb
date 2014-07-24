@@ -1,6 +1,4 @@
 Estagio::Application.routes.draw do
-  
-  
 
 
 
@@ -18,12 +16,34 @@ scope 'estagios/' do
   
       match '/cadastro', :controller => 'matriculas', :action => 'cadastro'
       match '/cadastro/create', :controller => 'matriculas', :action => 'create'
+      match '/cadastro/filtro', :controller => 'matriculas', :action => 'filtro'
+    
       match '/email/matriculas', :controller => 'matriculas', :action => 'email_matriculas'
+      
       match '/matriculas/analise/:id', :controller => 'matriculas', :action => 'analise'
+      match '/matriculas/anexo/:id', :controller => 'matriculas', :action => 'anexo'
+      match '/matriculas/view/:id', :controller => 'matriculas', :action => 'download'
       
       match '/delete/disciplina/', :controller => 'disciplinas', :action => 'delete'
       match 'delete/aviso', :controller => 'avisos', :action => 'delete'
       match 'delete/periodo', :controller => 'periodos', :action => 'delete'
+      
+      match 'users/', :controller => 'users', :action => 'index'
+      match 'users/edit', :controller => 'users', :action => 'edit'
+      match 'users/update/:id', :controller => 'users', :action => 'update'
+      match 'user/:id', :controller => 'users', :action => 'show'
+      
+      match "relatorios/", :controller => 'relatorios', :action => 'index'
+      match "relatorios/show/:id", :controller => 'relatorios', :action => 'show'
+      match "relatorios/view/:periodo/:codigo", :controller => 'relatorios', :action => 'view', :format => 'pdf'
+      match "relatorios/envio/", :controller => 'relatorios', :action => 'envio'
+      
+      match "conceitos/", :controller => 'conceitos', :action => 'index'
+      match "conceitos/show/:id", :controller => 'conceitos', :action => 'show'
+      match "conceitos/envio/:id", :controller => 'conceitos', :action => 'envio'
+      match "conceitos/modelo/:curso/:periodo", :controller => 'conceitos', :action => 'modelo_email'
+      
+      match "conceitos/dssi/:periodo/:ci", :controller => 'conceitos', :action => 'dssi', :format => 'xls'
       # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -74,6 +94,8 @@ scope 'estagios/' do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   
+
+    
       resources :disciplinas
       resources :matriculas
       resources :periodos

@@ -8,7 +8,7 @@ class DisciplinasController < ApplicationController
     @periodo = Periodo.find(:last)
     unless @periodo.blank?
       @disciplinas = Disciplina.find(:all, :conditions => {:periodo_id => @periodo.id})
-      @titulo = "Disciplinas ofertadas para o "+@periodo.quadrimestre.to_s+" de "+@periodo.ano.to_s
+      @titulo = "Disciplinas ofertadas para o "+@periodo.quadrimestre.to_s+" de "+@periodo.ano.to_s+" pelo "+current_usuario.centro.to_s
     else
       @titulo = t(:semperiodo) #"Nenhum período cadastrado"
     end
@@ -35,6 +35,13 @@ class DisciplinasController < ApplicationController
   # GET /disciplinas/new.json
   def new
     @disciplina = Disciplina.new
+    
+    if current_usuario.centro == "CMCC"
+      @cursos = [[t(:lic_matematica)]]
+      
+    elsif current_usuario.centro == "CCNH"
+      @cursos = [[t(:lic_ciencia_bio)],[t(:lic_fisica)],[t(:lic_quimica)],[t(:lic_fisica)]]
+    end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -45,6 +52,14 @@ class DisciplinasController < ApplicationController
   # GET /disciplinas/1/edit
   def edit
     @disciplina = Disciplina.find(params[:id])
+    
+    if current_usuario.centro == "CMCC"
+      @cursos = [[t(:lic_matematica)]]
+      
+    elsif current_usuario.centro == "CCNH"
+      @cursos = [[t(:lic_ciencia_bio)],[t(:lic_fisica)],[t(:lic_quimica)],[t(:lic_fisica)]]
+    end
+    
   end
 
   # POST /disciplinas

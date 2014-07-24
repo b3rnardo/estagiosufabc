@@ -1,19 +1,67 @@
 module MatriculasHelper
   
-  def filtro_centro(matricula)
+
+  
+  def mensagem_disponivel(matricula_id)
+    retornar = false
+    @matricula = Matricula.find(matricula_id)
+    
+    arquivo = @matricula.arquivo.file
+    
+    unless arquivo.blank?
+        nome = @matricula.arquivo.file.identifier
+    
+        if nome != nil or nome != ''
+            retornar = true
+        end
+    
+    end
+    
+    unless @matricula.mensagem.blank?
+      retornar = true
+    end
+    
+    retornar
+    
+  end
+  
+  def arquivo_anexo(matricula_id)
+    retornar = false
+    @matricula = Matricula.find(matricula_id)
+    
+    arquivo = @matricula.arquivo.file
+    
+    unless arquivo.blank?
+        nome = @matricula.arquivo.file.identifier
+    
+        if nome != nil or nome != ''
+            retornar = true
+        end
+    
+    end  
+    
+    retornar
+        
+    
+  end
+  
+  def filtro_centro(disciplina_id)
     #checa se a disciplina é do centro
-    @retornar = false
-    @matricula = matricula
-    @disciplina = Disciplina.find(@matricula.disciplina_id)
+    @retornar = false    
+    @disciplina = Disciplina.find(disciplina_id)
     
     if current_usuario.centro == "CMCC"
       
-        if @disciplina.curso == t(:lic_ciencia_bio) #"Licenciatura em ciências biológicas"
-            #teste, atualizar
+        if @disciplina.curso == t(:lic_matematica) #"Licenciatura em matemática"            
             @retornar = true
         
         end
+    elsif current_usuario.centro == "CCNH"
       
+        if @disciplina.curso == t(:lic_ciencia_bio) or @disciplina.curso == t(:lic_fisica) or @disciplina.curso == t(:lic_quimica) or @disciplina.curso == t(:lic_filosofia) #Licenciatura em ciencias biologicas, física, química ou filosofia
+            @retornar = true
+        end
+
     end
     
     @retornar
@@ -39,7 +87,12 @@ module MatriculasHelper
   
   def retorna_ra(id_do_aluno)
     @aluno = Usuario.find(id_do_aluno).ra
+  end  
+  
+  def retorna_email(id_do_aluno)
+    @aluno = Usuario.find(id_do_aluno).email
   end
+  
   
   def retorna_codigo(id_da_disciplina)
     @disciplina = Disciplina.find(id_da_disciplina) 
@@ -51,7 +104,7 @@ module MatriculasHelper
     
   end
   
-    def retorna_nome(id_da_disciplina)
+ def retorna_nome_disciplina(id_da_disciplina)
     @disciplina = Disciplina.find(id_da_disciplina) 
     
     if @disciplina.blank?
@@ -60,6 +113,8 @@ module MatriculasHelper
       @retornar = @disciplina.nome
     end
   end
+  
+    
   
     def retorna_turno(id_da_disciplina)
     @disciplina = Disciplina.find(id_da_disciplina) 
@@ -91,7 +146,7 @@ module MatriculasHelper
     end
   end
   
-    def retorna_horario_fim(id_da_disciplina)
+  def retorna_horario_fim(id_da_disciplina)
     @disciplina = Disciplina.find(id_da_disciplina) 
     
     if @disciplina.blank?
@@ -100,5 +155,14 @@ module MatriculasHelper
       @retornar = @disciplina.horario_fim
     end
   end
+  
+  def retorna_periodo_letivo(id_da_disciplina)
+      @disciplina = Disciplina.find(id_da_disciplina)
+      @periodo = Periodo.find(@disciplina.periodo_id)
+      
+      @retornar = @periodo.quadrimestre.to_s+" de "+@periodo.ano.to_s    
+  end  
+  
+    
   
 end

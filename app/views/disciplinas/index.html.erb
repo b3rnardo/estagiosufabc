@@ -20,13 +20,10 @@
 
 <% @disciplinas.each do |disciplina| %>
   
-  <%unless disciplina.blank?%>
+<% if filtro_centro(disciplina.id) %>
   <tr>
-    <%if current_usuario.tipo == "Aluno"%>
-        <td><%= check_box_tag(disciplina.id) %></td>
-    <%end%>
     
- <!--   <td><%= disciplina.curso %></td> -->
+ 
     <td><%= disciplina.codigo %></td>
     <td><%= disciplina.nome %></td>
     <td><%= disciplina.turno %></td>
@@ -37,8 +34,9 @@
     <td><%= link_to 'Editar', edit_disciplina_path(disciplina) %></td>
     <td><%= link_to 'Deletar', :controller => 'disciplinas', :action => 'delete', :id => disciplina.id %></td>
   </tr>
+<% end %>  
 <% end%>  
-<% end %>
+
 </table>
 
 <br />

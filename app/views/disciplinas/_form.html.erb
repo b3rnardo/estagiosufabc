@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :curso %><br />
-    <%= f.select :curso, [["Licenciatura em ciências biológicas"],["Licenciatura em filosofia"],["Licenciatura em física"],["Licenciatura em matemática"],["Licenciatura em química"]] %>
+    <%= f.select :curso, @cursos %>
   </div>
   <div class="field">
     <%= f.label :codigo %><br />

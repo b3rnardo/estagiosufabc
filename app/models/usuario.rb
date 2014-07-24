@@ -9,4 +9,10 @@ class Usuario < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me,
     :nome, :tipo, :ra, :centro, :telefone
   # attr_accessible :title, :body
+  
+  validates_size_of :ra, :is => 8, :if => :eh_aluno?
+  
+  def eh_aluno?
+    tipo == 'Aluno'
+  end
 end

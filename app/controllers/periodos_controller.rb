@@ -43,6 +43,7 @@ class PeriodosController < ApplicationController
   def create
     @periodos = Periodo.all
     @periodo = Periodo.new(params[:periodo])
+    @periodo.registrador_ci = 0
 
     respond_to do |format|     
       

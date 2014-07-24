@@ -1,5 +1,7 @@
 module PeriodosHelper
   
+  
+  
   def retorna_periodo_reajuste(periodo)
     @periodo = periodo
     @retornar = nil

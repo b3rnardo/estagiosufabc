@@ -1,0 +1,33 @@
+<% if flash[:notice]%>
+<p class="flash-notice"><font color = "green"><%= flash[:notice] %></font></p>
+  <% end %>
+<h2><%=@titulo%></h2>
+
+    <table>
+  <tr>
+    <th>Código da disciplina</th>
+    <th>Nome</th>
+    <th>Visualizar relatório</th>
+    <th>Enviar para:</th>
+  </tr>
+
+  <% @disciplinas.each do |disciplina| %>
+  
+  <%= form_for(:lista, :url => {:controller => 'relatorios', :action => 'envio', :id => disciplina.id}) do |f| %>
+  <% if filtro_relatorio(disciplina.codigo) %>
+  
+  <% if filtro_centro(disciplina.id) %>
+    <tr>
+        <td><%=disciplina.codigo%></td>
+        <td><%=disciplina.nome%></td>
+        <td><%= link_to "Avançar", :controller => 'relatorios', :action => 'view', :periodo => disciplina.periodo_id, :codigo => disciplina.codigo%></td>
+        <td><%= f.text_field :emails%></td>        
+        <td><%= f.submit "enviar emails"%></td>
+    
+    </tr>
+  <% end %>
+  <% end %>  
+  <% end %>
+  <% end %>  
+</table>
+
