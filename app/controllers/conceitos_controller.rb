@@ -2,6 +2,28 @@ class ConceitosController < ApplicationController
   
   before_filter :authenticate_usuario!, :except=>[:dssi]
   
+  def relatorio
+    @agora = Time.now
+    @curso = nil
+    @periodo = Periodo.find(params[:periodo])
+    if params[:curso] == 'bio'
+      @curso = t(:lic_ciencia_bio)
+    elsif params[:curso] == 'fil' 
+      @curso = t(:lic_filosofia)
+    elsif params[:curso] == 'fis'
+      @curso = t(:lic_fisica)
+    elsif params[:curso] == 'mat'
+      @curso = t(:lic_matematica)
+    elsif params[:curso] == 'qui'
+      @curso = t(:lic_quimica)
+    end
+    
+     
+    @matriculas = Matricula.find(:all, :conditions => {:status => 3, :periodo_id => @periodo.id}, :order => "disciplina_id")
+
+  end
+  
+  
   def dssi
 
       @tabulars = Matricula.find(:all, :conditions => {:periodo_id => params[:periodo], :numero_ci => params[:ci]})
@@ -41,7 +63,7 @@ class ConceitosController < ApplicationController
           @matriculas.each do |matricula|
               disciplina = Disciplina.find(matricula.disciplina_id)
               if disciplina.curso == @curso
-                  #matricula.status = 3
+                  matricula.status = 3
                   matricula.numero_ci = @periodo.registrador_ci
                   matricula.save
                   #@nome = retorna_nome_aluno(matricula.aluno_id)

@@ -276,50 +276,18 @@ pt-BR:
   activerecord:
     models:
         user: usuário        
-    attributes: 
+    attributes:
+        disciplina:
+            horario_inicio: horário de início
+            horario_fim: horário de fim
         periodo:
             matricula_inicio: início do período de matrícula
             reajuste_inicio: início do período de reajuste
-            cadastro_inicio: início do período de edição de disciplinas
-        duedate:        
-                matricula_inicio: início do período de matrícula
-                matricula_fim: fim do pedido de matrícula
-                orientation_end: entrega do formulário de orientação
-                evaluation_end: entrega da avaliação parcial
-                board_end: entrega da composição da banca
-                prazo_ata: envio da Ata digitalizada
-                prazo_relatorio: envio do relatório final
-                prazo_conceito: envio do conceito
-        user:
-            password: senha
-            ra: RA
-            name: nome
-        evaluation:
-            answer1: 1ª resposta
-            answer2: 2ª resposta
-            answer3: 3ª resposta
-            answer4: 4ª resposta
-            answer5: 5ª resposta
-            answer6: 6ª resposta
-            situacao: situação
-        project:
-            title: título
-            description: descrição
-            file: relatório
-            co_orientador_id: co-orientador
-            board_location_2: local
-            board_date: dia da defesa
-        board_document:
-            location: sala
-            location2: universidade
-            city: cidade
-        member:    
-            name: nome
-            
+            cadastro_inicio: início do período de edição de disciplinas           
             
             
     errors:
-      models:
+      models:          
           periodo:
             attributes:
                 matricula_inicio:
@@ -334,46 +302,13 @@ pt-BR:
                       disciplinas_iguais: é inválido! Já consta no banco de dados o par de disciplinas.
           disciplina:
               attributes:
+                  horario_inicio:
+                      conflito_de_horarios_no_modelo: não pode ser maior que o campo "horário de fim".
                   codigo:
                       disciplinas_iguais: é inválido! Já consta no banco de dados esse código cadastrado com essa matriz.
-          autoria:
-              attributes:
-                  banca_1:
-                      banca_invalida: informado é inválido. Os membros da banca precisam ser diferentes
-                  cpf:
-                      cpf_invalido: parece ser inválido
-          project:
-              attributes:
-                  co_orientador_id:
-                    erro_orientador: não pode ser igual ao campo "Orientador"
-                  board_location_2:
-                    erro_board_location_2: não pode ficar em branco
-                  board_date:
-                    erro_date_maior_que_fim_da_banca: não pode ser maior que o prazo limite para a entrega de composição da banca
-                  form_avaliacao:
-                      erro_avaliacao: A avaliação deve estar no formato .pdf
-          duedate:
-              attributes:
-                  board_end:
-                      validacao_duedates: não pode ser menor que a data do fim do pedido de matrícula
-                  matricula_fim:
-                      validacao_duedates: não pode ser menor que a data do início do pedido de matrícula 
-                  evaluation_end:
-                      validacao_duedates: não pode ser menor que a data do fim do pedido de matrícula
-                  orientation_end:
-                      validacao_duedates: não pode ser menor que a data do fim do pedido de matrícula
-                  prazo_ata:
-                      validacao_duedates: não pode ser menor que a data da entrega da composição da banca
-                  prazo_relatorio:
-                      validacao_duedates: não pode ser menor que a data da entrega da composição da banca
-                  prazo_conceito:
-                      validacao_duedates: não pode ser menor que a data da avaliação parcial
-          member:              
-              attributes:
-                  email:
-                      nao_cadastrado: não consta no nosso sistema
+
       template:
         header:
-          one: "1 error prohibited thisa {{model}} from being saved"
-          other: "{{count}} errors prohibited this {{model}} from being saved"
-        body: "There were problems with the following fields:"
+          one: "1 erro impediu que esse(a) {{model}} fosse salvo(a)"
+          other: "{{count}} impediram que esse(a){{model}} fosse salvo(a)"
+        body: "Existem erros com os seguintes campos:"

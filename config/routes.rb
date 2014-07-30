@@ -41,9 +41,9 @@ scope 'estagios/' do
       match "conceitos/", :controller => 'conceitos', :action => 'index'
       match "conceitos/show/:id", :controller => 'conceitos', :action => 'show'
       match "conceitos/envio/:id", :controller => 'conceitos', :action => 'envio'
-      match "conceitos/modelo/:curso/:periodo", :controller => 'conceitos', :action => 'modelo_email'
-      
+      match "conceitos/modelo/:curso/:periodo", :controller => 'conceitos', :action => 'modelo_email'      
       match "conceitos/dssi/:periodo/:ci", :controller => 'conceitos', :action => 'dssi', :format => 'xls'
+      match "conceitos/relatorio/:curso/:periodo", :controller => 'conceitos', :action => 'relatorio', :format => 'pdf'
       # The priority is based upon order of creation:
   # first created -> highest priority.
 

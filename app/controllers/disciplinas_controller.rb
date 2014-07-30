@@ -37,10 +37,10 @@ class DisciplinasController < ApplicationController
     @disciplina = Disciplina.new
     
     if current_usuario.centro == "CMCC"
-      @cursos = [[t(:lic_matematica)]]
+      $cursos = [[t(:lic_matematica)]]
       
     elsif current_usuario.centro == "CCNH"
-      @cursos = [[t(:lic_ciencia_bio)],[t(:lic_fisica)],[t(:lic_quimica)],[t(:lic_fisica)]]
+      $cursos = [[t(:lic_ciencia_bio)],[t(:lic_fisica)],[t(:lic_quimica)],[t(:lic_fisica)]]
     end
 
     respond_to do |format|
@@ -54,10 +54,10 @@ class DisciplinasController < ApplicationController
     @disciplina = Disciplina.find(params[:id])
     
     if current_usuario.centro == "CMCC"
-      @cursos = [[t(:lic_matematica)]]
+      $cursos = [[t(:lic_matematica)]]
       
     elsif current_usuario.centro == "CCNH"
-      @cursos = [[t(:lic_ciencia_bio)],[t(:lic_fisica)],[t(:lic_quimica)],[t(:lic_fisica)]]
+      $cursos = [[t(:lic_ciencia_bio)],[t(:lic_fisica)],[t(:lic_quimica)],[t(:lic_fisica)]]
     end
     
   end
@@ -70,7 +70,7 @@ class DisciplinasController < ApplicationController
 
     respond_to do |format|
       if @disciplina.save
-        format.html { redirect_to @disciplina, notice: 'Disciplina was successfully created.' }
+        format.html { redirect_to @disciplina, notice: 'Disciplina criada com sucesso.' }
         format.json { render json: @disciplina, status: :created, location: @disciplina }
       else
         format.html { render action: "new" }
@@ -86,7 +86,7 @@ class DisciplinasController < ApplicationController
 
     respond_to do |format|
       if @disciplina.update_attributes(params[:disciplina])
-        format.html { redirect_to @disciplina, notice: 'Disciplina was successfully updated.' }
+        format.html { redirect_to @disciplina, notice: 'Disciplina atualizada com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

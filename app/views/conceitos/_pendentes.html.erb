@@ -1,7 +1,8 @@
 
 
 <br><br><h3>As tabelas abaixo apresentam os aluno com conceitos atribuídos, porém, que ainda não foram enviados para o DSSI</h3>
-<% unless @lic_matematica.blank? %>
+
+<% if current_usuario.centro == "CMCC" %>
     <p><b>Licenciatura em matemática</b></p>
 
     <table>
@@ -26,13 +27,15 @@
   </tr>
 <% end %>
 </table>    
-    <br>
+<% unless @lic_matematica.blank? %>    
     <p><%= link_to "Enviar tabela para o DSSI", :controller => 'conceitos', :action => 'modelo_email', :curso => 'mat', :periodo => @periodo.id%></p>
-
+<% else %>
+    <p><%= link_to "Visualizar relatório de conceitos", :controller => 'conceitos', :action => 'relatorio', :curso => 'mat', :periodo => @periodo.id %></p>
 <% end %>
-    
-<% unless @lic_ciencia_bio.blank? %>
-    <p><b>Licenciatura em ciências biolágicas</b></p>
+
+<% else %>    
+
+    <p><b>Licenciatura em ciências biológicas</b></p>
 
     <table>
   <tr>
@@ -55,12 +58,14 @@
   </tr>
 <% end %>
 </table>
-    <br>
+<% unless @lic_ciencia_bio.blank? %>    
     <p><%= link_to "Enviar tabela para o DSSI", :controller => 'conceitos', :action => 'modelo_email', :curso => 'bio', :periodo => @periodo.id%></p>
+<% else %>
+    <p><%= link_to "Visualizar relatório de conceitos", :controller => 'conceitos', :action => 'relatorio', :curso => 'bio', :periodo => @periodo.id %></p>
 <% end %>
+    <br>
     
-    
-<% unless @lic_ciencia_bio.blank? %>
+
     <p><b>Licenciatura em filosofia</b></p>
 
     <table>
@@ -84,12 +89,14 @@
   </tr>
 <% end %>
 </table>
-    <br>
+ <% unless @lic_filosofia.blank? %> 
     <p><%= link_to "Enviar tabela para o DSSI", :controller => 'conceitos', :action => 'modelo_email', :curso => 'fil', :periodo => @periodo.id%></p>
+<% else %>
+    <p><%= link_to "Visualizar relatório de conceitos", :controller => 'conceitos', :action => 'relatorio', :curso => 'fil', :periodo => @periodo.id %></p>
 <% end %> 
+    <br>
     
-    
-<% unless @lic_fisica.blank? %>
+
     <p><b>Licenciatura em física</b></p>
 
     <table>
@@ -113,11 +120,13 @@
   </tr>
 <% end %>
 </table>
-    <br>
+<% unless @lic_fisica.blank? %>  
     <p><%= link_to "Enviar tabela para o DSSI", :controller => 'conceitos', :action => 'modelo_email', :curso => 'fis', :periodo => @periodo.id%></p>
+<% else %>
+    <p><%= link_to "Visualizar relatório de conceitos", :controller => 'conceitos', :action => 'relatorio', :curso => 'fis', :periodo => @periodo.id %></p>
 <% end %>  
     
-<% unless @lic_quimica.blank? %>
+
     <p><b>Licenciatura em química</b></p>
 
     <table>
@@ -141,8 +150,10 @@
   </tr>
 <% end %>
 </table>
-    <br>
+<% unless @lic_quimica.blank? %>
     <p><%= link_to "Enviar tabela para o DSSI", :controller => 'conceitos', :action => 'modelo_email', :curso => 'qui', :periodo => @periodo.id%></p>
+<% else %>
+    <p><%= link_to "Visualizar relatório de conceitos", :controller => 'conceitos', :action => 'relatorio', :curso => 'qui', :periodo => @periodo.id %></p>
 <% end %>      
     
-    
+<% end %>    
