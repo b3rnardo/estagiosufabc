@@ -27,17 +27,19 @@ class AvisosController < ApplicationController
 
   def index
     
-    @realizou_matricula = false
-    if current_usuario.tipo == "Aluno"
-        if realizou_matricula()
-            @realizou_matricula = true
+    @periodo = Periodo.find(:last)
+    unless @periodo.blank?
+    
+        @realizou_matricula = false
+        if current_usuario.tipo == "Aluno"
+            if realizou_matricula()
+                @realizou_matricula = true           
             
-            
-            @matriculas = Matricula.find(:all, :conditions => {:aluno_id => current_usuario.id, :periodo_id => Periodo.find(:last).id})
+                @matriculas = Matricula.find(:all, :conditions => {:aluno_id => current_usuario.id, :periodo_id => Periodo.find(:last).id})
+            end
         end
+    @avisos = Aviso.find(:all, :conditions => {:periodo_id => @periodo.id})
     end
-    @avisos = Aviso.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @avisos }
@@ -47,6 +49,9 @@ class AvisosController < ApplicationController
   # GET /avisos/1
   # GET /avisos/1.json
   def show
+    unless possui_acesso?()
+      return
+    end
     @aviso = Aviso.find(params[:id])
 
     respond_to do |format|
@@ -58,6 +63,9 @@ class AvisosController < ApplicationController
   # GET /avisos/new
   # GET /avisos/new.json
   def new
+    unless possui_acesso?()
+      return
+    end
     @aviso = Aviso.new
 
     respond_to do |format|
@@ -68,13 +76,22 @@ class AvisosController < ApplicationController
 
   # GET /avisos/1/edit
   def edit
+    unless possui_acesso?()
+      return
+    end
     @aviso = Aviso.find(params[:id])
   end
 
   # POST /avisos
   # POST /avisos.json
   def create
+    unless possui_acesso?()
+      return
+    end
+    
+    @periodo = Periodo.find(:last)
     @aviso = Aviso.new(params[:aviso])
+    @aviso.periodo_id = @periodo.id
     @hoje = Date.current
     @aviso.data = @hoje
     respond_to do |format|
@@ -91,6 +108,9 @@ class AvisosController < ApplicationController
   # PUT /avisos/1
   # PUT /avisos/1.json
   def update
+    unless possui_acesso?()
+      return
+    end
     @aviso = Aviso.find(params[:id])
 
     respond_to do |format|
@@ -107,6 +127,9 @@ class AvisosController < ApplicationController
   # DELETE /avisos/1
   # DELETE /avisos/1.json
   def delete
+    unless possui_acesso?()
+      return
+    end
     @aviso = Aviso.find(params[:id])
     @aviso.destroy
 

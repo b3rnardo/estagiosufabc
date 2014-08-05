@@ -4,18 +4,30 @@ class UsersController < ApplicationController
   before_filter :authenticate_usuario!#, :except=>[:show]
   
   def show
+    unless possui_acesso?()
+      return
+    end
     @aluno = Usuario.find(params[:id])
   end
   
   def index
+    unless possui_acesso?()
+      return
+    end
     @usuarios = Usuario.all
   end
 
   def edit
+    unless possui_acesso?()
+      return
+    end
     @usuario = Usuario.find(params[:id])
   end
   
   def update
+    unless possui_acesso?()
+      return
+    end
 
     @parametros = params[:usuario]
     @usuario = Usuario.find(params[:id])

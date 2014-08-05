@@ -22,7 +22,7 @@ scope 'estagios/' do
       
       match '/matriculas/analise/:id', :controller => 'matriculas', :action => 'analise'
       match '/matriculas/anexo/:id', :controller => 'matriculas', :action => 'anexo'
-      match '/matriculas/view/:id', :controller => 'matriculas', :action => 'download'
+      #match '/matriculas/view/:id', :controller => 'matriculas', :action => 'download'
       
       match '/delete/disciplina/', :controller => 'disciplinas', :action => 'delete'
       match 'delete/aviso', :controller => 'avisos', :action => 'delete'

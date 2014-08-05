@@ -3,6 +3,9 @@ class ConceitosController < ApplicationController
   before_filter :authenticate_usuario!, :except=>[:dssi]
   
   def relatorio
+    unless possui_acesso?()
+      return
+    end
     @agora = Time.now
     @curso = nil
     @periodo = Periodo.find(params[:periodo])
@@ -29,7 +32,7 @@ class ConceitosController < ApplicationController
       @tabulars = Matricula.find(:all, :conditions => {:periodo_id => params[:periodo], :numero_ci => params[:ci]})
       @periodo = Periodo.find(params[:periodo])
       
-      filename = "data_users.xls"
+      filename = "conceitos-"+params[:ci].to_s+".xls"
       respond_to do |format|
         format.html
         format.xls { headers["Content-Disposition"] = "attachment; filename=\"#{filename}\"" }
@@ -38,10 +41,13 @@ class ConceitosController < ApplicationController
   end
     
   def modelo_email
-    
+    unless possui_acesso?()
+      return
+    end
       curso = params[:curso]
       @periodo = Periodo.find(params[:periodo])
       @periodo.registrador_ci = (@periodo.registrador_ci+1)
+      @periodo.save
       @tabela = Array.new
       @curso = "desconhecido"
       
@@ -79,7 +85,9 @@ class ConceitosController < ApplicationController
   end
   
   def envio  
-    
+    unless possui_acesso?()
+      return
+    end
     @matricula = Matricula.find(params[:id])
     @disciplina = Disciplina.find(@matricula.disciplina_id)
     @horas = ((@disciplina.horario_fim - @disciplina.horario_inicio)/ 1.hour).round
@@ -94,9 +102,16 @@ class ConceitosController < ApplicationController
   end
   
   def index
+    unless possui_acesso?()
+      return
+    end
     @periodos = Periodo.all
     @periodos.reverse!
 
+    
+    
+    
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @periodos }
@@ -104,7 +119,9 @@ class ConceitosController < ApplicationController
   end
 
   def show    
-      
+    unless possui_acesso?()
+      return
+    end
     @periodo = Periodo.find(params[:id])
     unless @periodo.blank?
       

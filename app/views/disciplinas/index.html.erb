@@ -31,8 +31,10 @@
     <td><%= I18n.l disciplina.horario_inicio, :format => :hora %></td>
     <td><%= I18n.l disciplina.horario_fim, :format => :hora %></td>
     <td><%= link_to 'Detalhes', disciplina %></td>
-    <td><%= link_to 'Editar', edit_disciplina_path(disciplina) %></td>
-    <td><%= link_to 'Deletar', :controller => 'disciplinas', :action => 'delete', :id => disciplina.id %></td>
+    <% if periodo_editar_disciplina() %>
+        <td><%= link_to 'Editar', edit_disciplina_path(disciplina) %></td>
+        <td><%= link_to 'Deletar', :controller => 'disciplinas', :action => 'delete', :id => disciplina.id %></td>
+    <% end %>    
   </tr>
 <% end %>  
 <% end%>  
@@ -41,4 +43,9 @@
 
 <br />
 
-<%= link_to 'Nova Disciplina', new_disciplina_path %>
+<% if periodo_editar_disciplina() %>
+    <%= link_to 'Nova Disciplina', new_disciplina_path %>
+<% else %>
+    <p>O período de matrícula/edição não está ativo.</p>
+
+<% end %>

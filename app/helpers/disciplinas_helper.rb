@@ -26,4 +26,16 @@ module DisciplinasHelper
     @disciplina = Disciplina.find(id)
     @link = "localhost:3000/delete/disciplina"+@disciplina.id.to_string
   end
+  
+  def retorna_nome_aluno(aluno_id)
+    @aluno = Usuario.find(aluno_id).nome
+  end
+  
+  def retorna_email_aluno(aluno_id)
+    @aluno = Usuario.find(aluno_id).email
+  end  
+  
+  def retorna_telefone_aluno(aluno_id)
+    @aluno = Usuario.find(aluno_id).telefone
+  end   
 end

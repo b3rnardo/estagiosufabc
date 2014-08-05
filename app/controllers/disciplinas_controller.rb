@@ -3,10 +3,13 @@ class DisciplinasController < ApplicationController
   # GET /disciplinas.json
   before_filter :authenticate_usuario!#, :except=>[:show]
   def index
-    
+    unless possui_acesso?()
+      return
+    end
     
     @periodo = Periodo.find(:last)
     unless @periodo.blank?
+      # = "O período de cadastro/edição de disciplinas não está ativo ( "+@periodo.cadastro_inicio+" até "+@periodo.cadastro_fim
       @disciplinas = Disciplina.find(:all, :conditions => {:periodo_id => @periodo.id})
       @titulo = "Disciplinas ofertadas para o "+@periodo.quadrimestre.to_s+" de "+@periodo.ano.to_s+" pelo "+current_usuario.centro.to_s
     else
@@ -23,6 +26,9 @@ class DisciplinasController < ApplicationController
   # GET /disciplinas/1
   # GET /disciplinas/1.json
   def show
+    unless possui_acesso?()
+      return
+    end
     @disciplina = Disciplina.find(params[:id])
 
     respond_to do |format|
@@ -34,6 +40,9 @@ class DisciplinasController < ApplicationController
   # GET /disciplinas/new
   # GET /disciplinas/new.json
   def new
+    unless possui_acesso?()
+      return
+    end
     @disciplina = Disciplina.new
     
     if current_usuario.centro == "CMCC"
@@ -51,7 +60,11 @@ class DisciplinasController < ApplicationController
 
   # GET /disciplinas/1/edit
   def edit
+    unless possui_acesso?()
+      return
+    end
     @disciplina = Disciplina.find(params[:id])
+    @matriculas = Matricula.find(:all, :conditions => {:disciplina_id => @disciplina.id})
     
     if current_usuario.centro == "CMCC"
       $cursos = [[t(:lic_matematica)]]
@@ -65,6 +78,9 @@ class DisciplinasController < ApplicationController
   # POST /disciplinas
   # POST /disciplinas.json
   def create
+    unless possui_acesso?()
+      return
+    end
     @disciplina = Disciplina.new(params[:disciplina])
     @disciplina.periodo_id = Periodo.find(:last).id
 
@@ -82,10 +98,20 @@ class DisciplinasController < ApplicationController
   # PUT /disciplinas/1
   # PUT /disciplinas/1.json
   def update
+    unless possui_acesso?()
+      return
+    end
     @disciplina = Disciplina.find(params[:id])
 
     respond_to do |format|
       if @disciplina.update_attributes(params[:disciplina])
+        
+        @matriculas = Matricula.find(:all, :conditions => {:disciplina_id => @disciplina.id})
+        
+        @matriculas.each do |matricula|
+          UserMailer.disciplina_editada(matricula).deliver
+        end
+        
         format.html { redirect_to @disciplina, notice: 'Disciplina atualizada com sucesso.' }
         format.json { head :no_content }
       else
@@ -98,6 +124,9 @@ class DisciplinasController < ApplicationController
   # DELETE /disciplinas/1
   # DELETE /disciplinas/1.json
   def destroy
+    unless possui_acesso?()
+      return
+    end
     @disciplina = Disciplina.find(params[:id])
     @disciplina.destroy
 
@@ -108,6 +137,9 @@ class DisciplinasController < ApplicationController
   end
   
     def delete
+    unless possui_acesso?()
+      return
+    end
     @disciplina = Disciplina.find(params[:id])
     @disciplina.destroy
 

@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Detalhes:</b>
-  <%= @aviso.detalhes %>
+  <b>Título:</b>
+  <%= @aviso.titulo %>
 </p>
 
 <p>
@@ -11,15 +11,15 @@
 </p>
 
 <p>
-  <b>Titulo:</b>
-  <%= @aviso.titulo %>
+  <b>Detalhes:</b>
+  <%= @aviso.detalhes %>
 </p>
 
 <p>
   <b>Data:</b>
-  <%= @aviso.data %>
+  <%= @aviso.data.to_s_br %>
 </p>
 
 
-<%= link_to 'Edit', edit_aviso_path(@aviso) %> |
-<%= link_to 'Back', avisos_path %>
+<%= link_to 'Editar aviso', edit_aviso_path(@aviso) %> |
+<%= link_to 'Voltar', avisos_path %>

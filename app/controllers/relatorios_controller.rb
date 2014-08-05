@@ -4,6 +4,9 @@ class RelatoriosController < ApplicationController
   prawnto :prawn => {:page_size   => "A4"}
 
   def envio
+    unless possui_acesso?()
+      return
+    end
     @lista_recebida = params[:lista].to_a
     @disciplina = Disciplina.find(params[:id])
     @periodo = @disciplina.periodo_id
@@ -34,6 +37,9 @@ class RelatoriosController < ApplicationController
   end
   
   def index
+    unless possui_acesso?()
+      return
+    end
     @periodos = Periodo.all
     @periodos.reverse!
 
@@ -44,7 +50,9 @@ class RelatoriosController < ApplicationController
   end 
   
   def show
-
+    unless possui_acesso?()
+      return
+    end
     $disciplinas_amostradas = [nil]
     
     @periodo = Periodo.find(params[:id])

@@ -4,6 +4,13 @@ class UserMailer < ActionMailer::Base
   include ApplicationHelper
   include MatriculasHelper
   
+  def disciplina_editada(matricula)
+    @disciplina = Disciplina.find(matricula.disciplina_id)
+    @aluno = Usuario.find(matricula.aluno_id)
+    
+    mail(:to => @aluno.email, :subject => t(:disciplina_editada))
+  end
+  
   def modelo_ci(curso,periodo,remetente)
     @remetente = remetente
     @periodo = periodo

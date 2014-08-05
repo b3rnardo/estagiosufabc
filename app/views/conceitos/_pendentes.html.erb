@@ -12,8 +12,7 @@
     <th>Código</th>
     <th>Nome</th>
     <th>RA</th>
-    <th>Conceito</th>
-    <th>Horas</th>
+    <th>Parecer do estágio</th>
   </tr>
 
 <% @lic_matematica.each do |matricula| %>
@@ -43,8 +42,7 @@
     <th>RA</th>
     <th>Disciplina</th>
     <th>Código</th>
-    <th>Conceito</th>
-    <th>Horas</th>
+    <th>Parecer do estágio</th>
   </tr>
 
 <% @lic_ciencia_bio.each do |matricula| %>
@@ -54,7 +52,6 @@
     <td><%= retorna_nome_disciplina(matricula.disciplina_id) %></td>
     <td><%= retorna_codigo(matricula.disciplina_id) %></td>
     <td><%= matricula.conceito %></td>
-    <td><%= matricula.horas %></td>
   </tr>
 <% end %>
 </table>
@@ -74,8 +71,7 @@
     <th>RA</th>
     <th>Disciplina</th>
     <th>Código</th>
-    <th>Conceito</th>
-    <th>Horas</th>
+    <th>Parecer do estágio</th>
   </tr>
 
 <% @lic_filosofia.each do |matricula| %>
@@ -85,7 +81,6 @@
     <td><%= retorna_nome_disciplina(matricula.disciplina_id) %></td>
     <td><%= retorna_codigo(matricula.disciplina_id) %></td>
     <td><%= matricula.conceito %></td>
-    <td><%= matricula.horas %></td>
   </tr>
 <% end %>
 </table>
@@ -105,8 +100,7 @@
     <th>RA</th>
     <th>Disciplina</th>
     <th>Código</th>
-    <th>Conceito</th>
-    <th>Horas</th>
+    <th>Parecer do estágio</th>
   </tr>
 
 <% @lic_fisica.each do |matricula| %>
@@ -116,7 +110,6 @@
     <td><%= retorna_nome_disciplina(matricula.disciplina_id) %></td>
     <td><%= retorna_codigo(matricula.disciplina_id) %></td>
     <td><%= matricula.conceito %></td>
-    <td><%= matricula.horas %></td>
   </tr>
 <% end %>
 </table>
@@ -135,8 +128,7 @@
     <th>RA</th>
     <th>Disciplina</th>
     <th>Código</th>
-    <th>Conceito</th>
-    <th>Horas</th>
+    <th>Parecer do estágio</th>
   </tr>
 
 <% @lic_quimica.each do |matricula| %>
@@ -146,7 +138,6 @@
     <td><%= retorna_nome_disciplina(matricula.disciplina_id) %></td>
     <td><%= retorna_codigo(matricula.disciplina_id) %></td>
     <td><%= matricula.conceito %></td>
-    <td><%= matricula.horas %></td>
   </tr>
 <% end %>
 </table>

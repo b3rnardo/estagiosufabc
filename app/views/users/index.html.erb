@@ -1,9 +1,11 @@
 <% if flash[:notice]%>
-<p class="flash-notice"><font color = "green"><%= flash[:notice] %></font></p>
+<p class="flash-notice"><font color = "green" size="5"><%= flash[:notice] %></font></p>
+<br>
   <% end %>
 
 <% if flash[:erro]%>
-<p class="flash-notice"><font color = "green"><%= flash[:notice] %></font></p>
+<p class="flash-notice"><font color = "red" size="5"><%= flash[:erro] %></font></p>
+<br>
   <% end %>
 
 <h1>Usuários cadastrados no sistema</h1>

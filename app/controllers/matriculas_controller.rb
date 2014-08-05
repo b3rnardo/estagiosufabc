@@ -1,18 +1,23 @@
 class MatriculasController < ApplicationController
   # GET /matriculas
   # GET /matriculas.json
-  before_filter :authenticate_usuario!#, :except=>[:show]
+  before_filter :authenticate_usuario!#, :except=>[:download]
 
   def filtro
+    unless possui_acesso?()
+      return
+    end
     @filtro = params[:filtro].to_a    
     $curso = @filtro[0][1]
-    @bra = 4
         
 
     redirect_to :back
   end
   
   def download
+    unless possui_acesso?()
+      return
+    end
     @matricula = Matricula.find(params[:id])
     send_file  @matricula.arquivo.path
     
@@ -46,7 +51,9 @@ class MatriculasController < ApplicationController
   end
   
   def index
-    
+    unless possui_acesso?()
+      return
+    end
     @periodo = Periodo.find(:last)
     
     unless @periodo.blank?
@@ -68,6 +75,9 @@ class MatriculasController < ApplicationController
   # GET /matriculas/1
   # GET /matriculas/1.json
   def show
+    unless possui_acesso?()
+      return
+    end
     @matricula = Matricula.find(params[:id])
 
     respond_to do |format|
@@ -79,6 +89,9 @@ class MatriculasController < ApplicationController
   # GET /matriculas/new
   # GET /matriculas/new.json
   def new
+    unless possui_acesso?()
+      return
+    end
     @matricula = Matricula.new
 
     respond_to do |format|
@@ -89,6 +102,9 @@ class MatriculasController < ApplicationController
 
   # GET /matriculas/1/edit
   def edit
+    unless possui_acesso?()
+      return
+    end
     @matricula = Matricula.find(params[:id])
   end
 
@@ -111,7 +127,7 @@ class MatriculasController < ApplicationController
         
     else
       
-        @cursos_novo.each do |curso|
+        @cursos_novo.each do |curso|        
         @curso = Curso.new :aluno_id => current_usuario.id, :nome_do_curso => curso
         @curso.save
   
@@ -122,18 +138,19 @@ class MatriculasController < ApplicationController
     
     @cursos_antigo.each do |curso_antigo|
       #apaga o curso, caso o aluno desmarque a caixa
-      controle3 = false
+      encontrou_curso = false
       
       for i in @cursos_novo
         if i == curso_antigo.nome_do_curso
-          controle3 = true
+          encontrou_curso = true
           break
           
         end
         
       end
       
-      unless controle3
+      unless encontrou_curso
+        #apaga o curso se ele não foi encontrado no vetor
         curso_antigo.destroy
       end
     end
@@ -158,7 +175,7 @@ class MatriculasController < ApplicationController
     $matriculas_atuais = Matricula.find(:all, :conditions => {:aluno_id => $id_do_usuario, :periodo_id => @periodo.id})
     #procura todas as matrículas do aluno no período atual
     
-    controle = false
+    erro_matricula = false
     @disciplinas.each do |disciplina|
       
       #verifica se o aluno ja se matriculou na disciplina
@@ -167,11 +184,11 @@ class MatriculasController < ApplicationController
 
       
       if @aux.blank?
-          @matricula = Matricula.new :disciplina_id => disciplina, :aluno_id => current_usuario.id, :periodo_id => Periodo.find(:last).id, :status => 0,
-          :parecer => "Aguardando analise da secretaria"
-      
+          
+          @disciplina_aux = Disciplina.find(disciplina)
+          @matricula = @disciplina_aux.matriculas.create(:aluno_id => current_usuario.id, :periodo_id => @periodo.id, :status => 0, :parecer => "Aguardando analise da secretaria")
           unless @matricula.save
-              controle = true
+              erro_matricula = true
               break
           end        
       end
@@ -181,26 +198,27 @@ class MatriculasController < ApplicationController
     #verifica se existe alguma matrícula fora as que o aluno solicitou agora
     # - para o caso de ter desistido de uma disciplina
     
-    unless controle
+    unless erro_matricula
     
         @matriculas_atuais.each do |matricula|
-            controle2 = false
+            desistiu_matricula = false
             for i in @disciplinas
           
                 if i.to_i == matricula.disciplina_id
-                    controle2 = true
+                    desistiu_matricula = true
                     break
                 end
             end
       
-            unless controle2
+            unless desistiu_matricula
+                #apaga a matrícula se o aluno desistiu dela
                 matricula.destroy
             end
       
         end  
 
     end
-         unless controle
+         unless erro_matricula
             respond_to do |format|
                 format.html { redirect_to :root, notice: 'Matriculas realizadas com sucesso.' }
                 format.json { render json: @matricula, status: :created, location: @matricula }
@@ -215,6 +233,9 @@ class MatriculasController < ApplicationController
   # PUT /matriculas/1
   # PUT /matriculas/1.json
   def analise
+    unless possui_acesso?()
+      return
+    end
     @matricula = Matricula.find(params[:id])
     @teste = params[:matricula]
     
@@ -239,6 +260,9 @@ class MatriculasController < ApplicationController
   # DELETE /matriculas/1
   # DELETE /matriculas/1.json
   def destroy
+    unless possui_acesso?()
+      return
+    end
     @matricula = Matricula.find(params[:id])
     @matricula.destroy
 

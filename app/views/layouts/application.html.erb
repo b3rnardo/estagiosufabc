@@ -37,14 +37,9 @@
                       <!-- Usuário logado -->
                       
                       <% if current_usuario.tipo == "Administrador"%>
-                          <li><%=link_to "Home", "/estagios"%></li>
+                          <li><%=link_to "Avisos", "/estagios"%></li>
                           <li><%=link_to "Períodos", "/estagios/periodos"%></li>
-                          <% if periodo_editar_disciplina() %>
-                              <li><%= link_to "Editar disciplinas", "/estagios/disciplinas"%></li>
-                          <% else %>
-                              <li><h1>Editar disciplinas</h1></li>
-                          <% end %>
-                          
+                          <li><%= link_to "Disciplinas", "/estagios/disciplinas"%></li>                          
                           <li><%= link_to "Analisar pedidos de matrícula", "/estagios/matriculas"%></li>
                           <li><%= link_to "Relatórios de matrícula", "/estagios/relatorios"%></li>
                           <li><%= link_to "Conceitos", "/estagios/conceitos"%></li> 
@@ -53,9 +48,9 @@
                        
                           
                       <% elsif current_usuario.tipo == "Secretaria"%>
-                          <li><%=link_to "Home", "/estagios"%></li>
+                          <li><%=link_to "Avisos", "/estagios"%></li>
                           <li><%=link_to "Períodos", "/estagios/periodos"%></li>
-                          <li><%= link_to "Editar disciplinas", "/estagios/disciplinas"%></li>
+                          <li><%= link_to "Disciplinas", "/estagios/disciplinas"%></li>
                           <li><%= link_to "Analisar pedidos de matrícula", "/estagios/matriculas"%></li>
                           <li><%= link_to "Relatórios de matrícula", "/estagios/relatorios"%></li> 
                           <li><%= link_to "Conceitos", "/estagios/conceitos"%></li> 

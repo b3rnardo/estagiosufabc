@@ -6,7 +6,7 @@ class Matricula < ActiveRecord::Base
     :status, :observacao, :parecer, :mensagem, :arquivo, :arquivo_cache, :conceito, :horas
   
   validate :checa_matricula, :on => :create
-  validate :checa_conflitos
+  validate :checa_conflitos, :on => :create
   mount_uploader :arquivo, ArquivoUploader
   
     def checa_conflitos
