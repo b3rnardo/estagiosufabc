@@ -1,9 +1,11 @@
 <% if flash[:notice]%>
-<p class="flash-notice"><font color = "green"><%= flash[:notice] %></font></p>
+<p class="flash-notice"><font color = "green" size="5"><%= flash[:notice] %></font></p>
+<br>
   <% end %>
 
 <% if flash[:erro]%>
-<p class="flash-notice"><font color = "green"><%= flash[:erro] %></font></p>
+<p class="flash-notice"><font color = "green" size="5"><%= flash[:erro] %></font></p>
+<br>
   <% end %>
 
 <h1>Análise de Matrículas</h1>
@@ -21,7 +23,7 @@
     <th>Dia</th>
     <th>Horario</th> -->
     <th>Parecer</th>
-    <th>Observações</th>
+    <th>Mensagem ao aluno</th>
     <th></th>
     <th></th>
   </tr>

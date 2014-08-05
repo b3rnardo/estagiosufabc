@@ -3,6 +3,20 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :authenticate_usuario!#, :except=>[:show]
 
+    def retorna_periodo_dssi(periodo)
+      @retornar = "desconhecido"
+    if periodo.quadrimestre == t(:q1)
+      @retornar = periodo.ano.to_s+"."+1.to_s
+    elsif periodo.quadrimestre == t(:q2)
+      @retornar = periodo.ano.to_s+"."+2.to_s
+    elsif periodo.quadrimestre == t(:q3)
+      @retornar = periodo.ano.to_s+"."+3.to_s
+    end
+    
+    @retornar
+  end
+  
+  
   def possui_acesso?()
     
     if usuario_signed_in?

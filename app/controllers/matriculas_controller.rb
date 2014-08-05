@@ -121,6 +121,7 @@ class MatriculasController < ApplicationController
     @periodo = Periodo.find(:last)
     
     if @cursos_novo.blank?
+        #ao menos um curso deve ser informado
         flash[:erro] = t(:erro_curso)
         redirect_to :back
         return
@@ -183,8 +184,7 @@ class MatriculasController < ApplicationController
       
 
       
-      if @aux.blank?
-          
+      if @aux.blank?          
           @disciplina_aux = Disciplina.find(disciplina)
           @matricula = @disciplina_aux.matriculas.create(:aluno_id => current_usuario.id, :periodo_id => @periodo.id, :status => 0, :parecer => "Aguardando analise da secretaria")
           unless @matricula.save
@@ -199,11 +199,11 @@ class MatriculasController < ApplicationController
     # - para o caso de ter desistido de uma disciplina
     
     unless erro_matricula
-    
+        #apenas entra se não houve nenhum erro na matricula
         @matriculas_atuais.each do |matricula|
-            desistiu_matricula = false
-            for i in @disciplinas
           
+            desistiu_matricula = false
+            for i in @disciplinas          
                 if i.to_i == matricula.disciplina_id
                     desistiu_matricula = true
                     break

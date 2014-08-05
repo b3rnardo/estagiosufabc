@@ -15,6 +15,7 @@ gem 'carrierwave'
 gem 'thin'
 gem 'axlsx_rails'
 gem 'tzinfo'
+gem 'to_xls-rails'
 
 
 
