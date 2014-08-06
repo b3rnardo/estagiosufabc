@@ -16,6 +16,7 @@ gem 'thin'
 gem 'axlsx_rails'
 gem 'tzinfo'
 gem 'to_xls-rails'
+gem 'to_xls', '~> 1.0.0'
 
 
 

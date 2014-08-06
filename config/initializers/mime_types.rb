@@ -8,4 +8,4 @@
 
 #---------------------------------------------------------------
 #Mime::Type.register "application/xls", :xls
-Mime::Type.register_alias "text/excel", :xls
+Mime::Type.register 'application/vnd.ms-excel', :xls

@@ -28,28 +28,36 @@ class ConceitosController < ApplicationController
   
   
   def dssi
+    
+    @periodo = Periodo.find(params[:periodo])
+    @matriculas = Matricula.find(:all)
+    
+    @tabela = Array.new
+   
+    @matriculas.each do |matricula|
+      linha = Tabela.new
+      linha.nome = retorna_nome_aluno(matricula.aluno_id)
+      linha.ra = retorna_ra(matricula.aluno_id)
+      linha.disciplina = retorna_nome_disciplina(matricula.disciplina_id)
+      linha.codigo = retorna_codigo(matricula.disciplina_id)
+      linha.parecer = matricula.conceito
+      linha.quadrimestre = retorna_periodo_dssi(@periodo)
+      
+      @tabela.append(linha)
+    end  
 
-      @matriculas = Matricula.find(:all, :conditions => {:periodo_id => params[:periodo], :numero_ci => params[:ci]})
-      @periodo = Periodo.find(params[:periodo])
-      @tabela = [["nome","ra","disciplina","codigo","conceito","periodo"]]
-      
-      @matriculas.each do |matricula|
-        linha = [[retorna_nome_aluno(matricula.aluno_id),retorna_ra(matricula.aluno_id),retorna_nome_disciplina(matricula.disciplina_id),retorna_codigo(matricula.disciplina_id),matricula.conceito,retorna_periodo_dssi(@periodo)]]
-        @tabela.append(linha)
-      end
-      
-      @matriculas.to_xls(:only => [:periodo_id, :aluno_id])
-      
-    respond_to do |format|
-     format.xls do     
-        render :xls => @matriculas,
-          :columns => [ :name, :ref ]
-          
-     end
+  respond_to do |format|
+    format.html
+    format.xls do
+      render :xls => @tabela,
+                     :columns => [ :nome, :ra, :disciplina, :codigo, :parecer, :quadrimestre ],
+                     :headers => %w[ Nome RA Disciplina Codigo Parecer Quadrimestre]
     end
-    
   end
+
     
+
+end    
   def modelo_email
     unless possui_acesso?()
       return
