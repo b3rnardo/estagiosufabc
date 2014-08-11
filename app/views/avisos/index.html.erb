@@ -9,7 +9,10 @@
   <% end %>
 
 <h1>Avisos da secretaria</h1>
+<% if @avisos.blank? %>
+  <p>As secretarias não passaram nenhum aviso para esse período letivo.</p>
 
+<% end %>
 <% @avisos.each do |aviso| %>
 <h3> <%=aviso.titulo%></h3>
 <%=aviso.detalhes%>
@@ -42,6 +45,6 @@
 
 <% if current_usuario.tipo == "Secretaria" or current_usuario.tipo == "Administrador" %>
 
-<%= link_to 'Novo aviso', new_aviso_path %>
+    <%= link_to 'Novo aviso', new_aviso_path %>
 
 <% end %>

@@ -2,8 +2,12 @@ class AvisosController < ApplicationController
   # GET /avisos
   # GET /avisos.json
   
-    before_filter :authenticate_usuario!#, :except=>[:show]
+    before_filter :authenticate_usuario!, :except=>[:confirm]
   
+    def confirm
+      
+    end
+    
     def realizou_matricula()
       @periodo = Periodo.find(:last)
       unless @periodo.blank?
@@ -39,6 +43,8 @@ class AvisosController < ApplicationController
             end
         end
     @avisos = Aviso.find(:all, :conditions => {:periodo_id => @periodo.id})
+    else
+      @avisos = Aviso.all
     end
     respond_to do |format|
       format.html # index.html.erb
@@ -90,6 +96,13 @@ class AvisosController < ApplicationController
     end
     
     @periodo = Periodo.find(:last)
+    
+    if @periodo.blank?
+        flash[:erro] = t(:sem_periodo)
+        redirect_to :back
+        return
+    end
+    
     @aviso = Aviso.new(params[:aviso])
     @aviso.periodo_id = @periodo.id
     @hoje = Date.current

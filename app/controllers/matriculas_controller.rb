@@ -44,9 +44,23 @@ class MatriculasController < ApplicationController
       flash[:notice] = t(:emailenviado)
   end
   
-  def cadastro
+  def cadastro   
     
-    @periodo = Periodo.find(:last)
+    @periodo = Periodo.find(:last)    
+    
+        @matriculas = Periodo.find(:all, :conditions => ['matricula_inicio <= ? AND matricula_fim >= ?', Date.today, Date.today])
+        @matricula = @matriculas[0]
+        
+        @reajustes = Periodo.find(:all, :conditions => ['reajuste_inicio <= ? AND reajuste_fim >= ?', Date.today, Date.today])
+        @reajuste = @reajustes[0]
+        
+        if @matricula.blank? and @reajuste.blank?
+          flash[:erro] = t(:entrada_incorreta)
+          redirect_to :controller => 'avisos', :action => 'index'          
+          return
+        end      
+    
+    
     @disciplinas = Disciplina.find(:all, :conditions => {:periodo_id => @periodo.id})
   end
   
@@ -244,7 +258,7 @@ class MatriculasController < ApplicationController
             if @matricula.parecer ==  "Aprovado"
                   @matricula.status = 1
             else
-                  @matricula.status = 2
+                  @matricula.status = -1
             end
             
             @matricula.save

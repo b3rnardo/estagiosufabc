@@ -17,10 +17,10 @@
   <div><%= f.label :ra %><br />
   <%= f.text_field :ra %></div>
 
-  <div><%= f.label :password %><br />
+  <div><%= f.label :senha %><br />
   <%= f.password_field :password %></div>
 
-  <div><%= f.label :password_confirmation %><br />
+  <div><%= f.label :confirme_a_senha %><br />
   <%= f.password_field :password_confirmation %></div>
 
   <%= f.hidden_field :tipo, :value => "Aluno"%>
@@ -29,3 +29,5 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
+  <br>
+  <p><font color="red">Atenção: O e-mail utilizado deve ser @ufabc.edu.br ou @aluno.ufabc.edu.br</font></p>

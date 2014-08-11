@@ -8,6 +8,7 @@ class UsersController < ApplicationController
       return
     end
     @aluno = Usuario.find(params[:id])
+    @cursos = Curso.find(:all, :conditions => {:aluno_id => params[:id]})
   end
   
   def index

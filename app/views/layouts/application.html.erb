@@ -19,8 +19,8 @@
     	<span id="header_icon"></span>
     	<div id="header_content">
         	<div id="site_title">
-                  <p><b><h3>Sistema de gerenciamento de pedidos de estágio</h3></b></p>   </div>
-          <p>Sistema desenvolvido para auxiliar no processo de matrícula em estágios das licenciaturas</p>
+                  <p><b><h3>Universidade Federal do ABC - Sistema de gerenciamento de pedidos de estágio</h3></b></p>   </div>
+          <p>Sistema desenvolvido para auxiliar no processo de matrícula em estágios das licenciaturas do CMCC e CCNH</p>
 		 
 		</div>
     </div> <!-- end of header -->
@@ -92,7 +92,13 @@
           </div>
         <div id="templatemo_content">
           <%if usuario_signed_in?%>
-              <p>Bem vindo <%= current_usuario.nome%></p>
+          
+             <% if current_usuario.centro == "CMCC" or current_usuario.centro == "CCNH" %>
+                <p><b>Logado como:</b> <%= current_usuario.nome%> - <%= current_usuario.centro %>.</p>
+             <% else %> 
+                <p><b>Logado como:</b> <%= current_usuario.nome%></p>
+             <% end %>
+              
               <p><b>Não se esqueça se encerrar sua sessão antes de fechar o navegador ou acessar outros sites.</b></p>
               <br><br>
           <%end%>

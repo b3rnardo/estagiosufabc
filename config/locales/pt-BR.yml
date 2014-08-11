@@ -68,8 +68,9 @@ pt-BR:
   q3: 3º quadrimestre
   codigo: Código
   disciplina_editada: Disciplina editada
-  
-  
+  entrada_incorreta: Sua solicitação não pôde ser processada. por favor tente novamente mais tarde. Caso o erro persista, por favor, contate o administrador do sistema.
+  sem_periodo: Não existem períodos cadastrados para esse aviso.
+      
   date:
     abbr_day_names:
     - Dom

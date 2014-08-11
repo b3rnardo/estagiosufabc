@@ -107,8 +107,8 @@ class DisciplinasController < ApplicationController
       if @disciplina.update_attributes(params[:disciplina])
         
         @matriculas = Matricula.find(:all, :conditions => {:disciplina_id => @disciplina.id})
-        
         @matriculas.each do |matricula|
+          #avisa aos alunos, caso existam, que houveram alterações na disciplina
           UserMailer.disciplina_editada(matricula).deliver
         end
         

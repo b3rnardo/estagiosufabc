@@ -17,7 +17,7 @@ class UserMailer < ActionMailer::Base
     @curso = curso 
     @agora = I18n.l Date.today, :format => :long
     
-    @link = 'http://localhost:3000/estagios/conceitos/dssi/'+@periodo.id.to_s+'/'+@periodo.registrador_ci.to_s
+    @link = 'http://cmcc-bcc.ufabc.edu.br/estagios/conceitos/dssi/'+@periodo.id.to_s+'/'+@periodo.registrador_ci.to_s
 
     mail(:to => "bernardo_mec@live.com", :subject => t(:lancamento_conceito))
   end
@@ -28,8 +28,8 @@ class UserMailer < ActionMailer::Base
     @email = email
     @disciplina = disciplina
     @periodo = Periodo.find(@disciplina.periodo_id)
-    @link = 'http://localhost:3000/estagios/relatorios/view/'+@periodo.id.to_s+'/'+@disciplina.codigo.to_s
-    mail(:to => @email, :subject => "Analise da matricula")
+    @link = 'http://cmcc-bcc.ufabc.edu.br/estagios/relatorios/view/'+@periodo.id.to_s+'/'+@disciplina.codigo.to_s
+    mail(:to => @email, :subject => "Analises de matricula")
   end
   
   def analise_matricula(matricula)    

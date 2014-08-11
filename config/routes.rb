@@ -9,11 +9,13 @@ scope 'estagios/' do
 
 
       
-    devise_for :usuarios do
+    devise_for :usuarios, :controllers => { :registrations => "registrations" } do
     get 'logout' => 'sessions#destroy', :as => :destroy_user_session
     get 'login' => 'devise/sessions#new'
   end
-  
+      match 'home', :controller => 'avisos', :action => 'home'
+      match'/confirm', :controller => 'avisos', :action => 'confirm'
+    
       match '/cadastro', :controller => 'matriculas', :action => 'cadastro'
       match '/cadastro/create', :controller => 'matriculas', :action => 'create'
       match '/cadastro/filtro', :controller => 'matriculas', :action => 'filtro'
@@ -22,7 +24,7 @@ scope 'estagios/' do
       
       match '/matriculas/analise/:id', :controller => 'matriculas', :action => 'analise'
       match '/matriculas/anexo/:id', :controller => 'matriculas', :action => 'anexo'
-      #match '/matriculas/view/:id', :controller => 'matriculas', :action => 'download'
+      match '/matriculas/download/:id', :controller => 'matriculas', :action => 'download'
       
       match '/delete/disciplina/', :controller => 'disciplinas', :action => 'delete'
       match 'delete/aviso', :controller => 'avisos', :action => 'delete'

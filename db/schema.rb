@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140804170924) do
+ActiveRecord::Schema.define(:version => 20140808185244) do
 
   create_table "avisos", :force => true do |t|
     t.string   "detalhes"
@@ -68,8 +68,6 @@ ActiveRecord::Schema.define(:version => 20140804170924) do
     t.datetime "updated_at",       :null => false
     t.string   "quadrimestre"
     t.integer  "ano"
-    t.date     "cadastro_inicio"
-    t.date     "cadastro_fim"
     t.integer  "registrador_ci"
   end
 
@@ -84,6 +82,14 @@ ActiveRecord::Schema.define(:version => 20140804170924) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
+    t.integer  "failed_attempts",        :default => 0
+    t.string   "unlock_token"
+    t.datetime "locked_at"
+    t.string   "authentication_token"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "nome"
@@ -93,7 +99,10 @@ ActiveRecord::Schema.define(:version => 20140804170924) do
     t.string   "telefone"
   end
 
+  add_index "usuarios", ["authentication_token"], :name => "index_usuarios_on_authentication_token", :unique => true
+  add_index "usuarios", ["confirmation_token"], :name => "index_usuarios_on_confirmation_token", :unique => true
   add_index "usuarios", ["email"], :name => "index_usuarios_on_email", :unique => true
   add_index "usuarios", ["reset_password_token"], :name => "index_usuarios_on_reset_password_token", :unique => true
+  add_index "usuarios", ["unlock_token"], :name => "index_usuarios_on_unlock_token", :unique => true
 
 end

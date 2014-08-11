@@ -3,7 +3,7 @@ class Periodo < ActiveRecord::Base
     :quadrimestre, :ano, :cadastro_inicio, :cadastro_fim, :registrador_ci
   
   validate :matricula_inicio_menor_matricula_fim?, :reajuste_inicio_menor_reajuste_fim?
-  validate :cadastro_inicio_menor_cadastro_fim?, :matricula_fim_menor_reajuste_inicio?, :cadastro_fim_menor_matricula_inicio?
+  validate :matricula_fim_menor_reajuste_inicio?
   validates :ano, :presence => true, :numericality => true
   validates_size_of :ano, :is => 4
   

@@ -1,3 +1,8 @@
+<% if flash[:erro]%>
+    <p class="flash-notice"><font color = "red" size="5"><%= flash[:erro] %></font></p>
+    <br>
+<% end %>
+
 <%= form_for(@aviso) do |f| %>
   <% if @aviso.errors.any? %>
     <div id="error_explanation">

@@ -17,3 +17,11 @@
   <b>Telefone para contato:</b>
   <%= @aluno.telefone %>
 </p>
+
+<% unless @cursos.blank? %>
+    <br>
+    <p><b>Cursos informados durante a matrícula:</b></p>
+    <% @cursos.each do |curso| %>
+        <p><%= curso.nome_do_curso %></p>        
+    <% end %>
+<% end %>

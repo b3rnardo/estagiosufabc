@@ -1,7 +1,7 @@
-<p>Hello <%= @resource.email %>!</p>
+<p>Prezado(a) <%= @resource.nome %>!</p>
 
-<p>Your account has been locked due to an excessive amount of unsuccessful sign in attempts.</p>
+<p>Sua conta foi bloqueada devido a um número excesso de tentativas mal sucedidas de login no sistema de gerenciamento de estágios das licenciatura da UFABC.</p>
 
-<p>Click the link below to unlock your account:</p>
+<p>Cli the link below to unlock your account:</p>
 
 <p><%= link_to 'Unlock my account', unlock_url(@resource, :unlock_token => @resource.unlock_token) %></p>

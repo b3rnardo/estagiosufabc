@@ -7,6 +7,15 @@ class Matricula < ActiveRecord::Base
   
   validate :checa_matricula, :on => :create
   validate :checa_conflitos, :on => :create
+  validates :arquivo, :format => {:with => /.(pdf)/, :message => "deve estar no formato .pdf"}, :if => :existe_arquivo?
+  
+  def existe_arquivo?    
+    @nome_do_relatorio = arquivo.identifier
+    @retornar = true    
+    @retornar = false if @nome_do_relatorio == nil
+    @retornar
+  end
+  
   mount_uploader :arquivo, ArquivoUploader
   
     def checa_conflitos

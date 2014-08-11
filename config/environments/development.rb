@@ -4,12 +4,12 @@ Estagio::Application.configure do
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
-  config.cache_classes = false
+
 
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true
 
-  # Show full error reports and disable caching
+  # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
@@ -35,7 +35,7 @@ Estagio::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
   
-   config.action_mailer.default_url_options = { :host => 'cmcc-bcc.ufabc.edu.br/estagios' }
+config.action_mailer.default_url_options = { :host => 'cmcc-bcc.ufabc.edu.br' }
    
 config.action_mailer.delivery_method = :smtp
 config.action_mailer.smtp_settings = {

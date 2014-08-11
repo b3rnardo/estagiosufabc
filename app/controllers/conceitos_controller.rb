@@ -22,7 +22,7 @@ class ConceitosController < ApplicationController
     end
     
      
-    @matriculas = Matricula.find(:all, :conditions => {:status => 3, :periodo_id => @periodo.id}, :order => "disciplina_id")
+    @matriculas = Matricula.find(:all, :conditions => {:status => 3, :periodo_id => @periodo.id}, :order => "aluno_id")
 
   end
   
@@ -30,7 +30,7 @@ class ConceitosController < ApplicationController
   def dssi
     
     @periodo = Periodo.find(params[:periodo])
-    @matriculas = Matricula.find(:all)
+    @matriculas = Matricula.find(:all, :conditions => {:periodo_id => params[:periodo], :numero_ci => params[:ci]}, :order => "aluno_id")
     
     @tabela = Array.new
    
@@ -57,7 +57,8 @@ class ConceitosController < ApplicationController
 
     
 
-end    
+end  
+
   def modelo_email
     unless possui_acesso?()
       return
@@ -150,7 +151,7 @@ end
       @titulo = t(:semperiodo) #"Nenhum período cadastrado"
     end
     
-      @matriculas_aux = Matricula.find(:all, :conditions => {:periodo_id => params[:id], :status => 2}, :order => "disciplina_id")
+      @matriculas_aux = Matricula.find(:all, :conditions => {:periodo_id => params[:id], :status => 2}, :order => "aluno_id")
           @lic_ciencia_bio = Array.new
           @lic_filosofia = Array.new
           @lic_fisica = Array.new

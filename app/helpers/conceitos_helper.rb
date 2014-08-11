@@ -22,8 +22,7 @@ module ConceitosHelper
   end    
   
   def retorna_nome_disciplina(id_da_disciplina)
-    @disciplina = Disciplina.find(id_da_disciplina).nome
-    @bre = 4
+    @disciplina = Disciplina.find(id_da_disciplina).nome    
   end
   
   def retorna_codigo(id_da_disciplina)
