@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/renan.bernardo/Desktop/Estagio/app/controllers/disciplinas_controller.rb</file>
+            <file>file:/C:/Users/renan.bernardo/Desktop/Estagio/app/views/matriculas/index.html.erb</file>
+            <file>file:/C:/Users/renan.bernardo/Desktop/Estagio/app/controllers/matriculas_controller.rb</file>
+            <file>file:/C:/Users/renan.bernardo/Desktop/Estagio/app/views/avisos/nao_logado.html.erb</file>
+            <file>file:/C:/Users/renan.bernardo/Desktop/Estagio/app/views/conceitos/relatorio.pdf.prawn</file>
+            <file>file:/C:/Users/renan.bernardo/Desktop/Estagio/app/views/disciplinas/_form.html.erb</file>
+            <file>file:/C:/Users/renan.bernardo/Desktop/Estagio/app/views/avisos/index.html.erb</file>
+            <file>file:/C:/Users/renan.bernardo/Desktop/Estagio/app/controllers/avisos_controller.rb</file>
+            <file>file:/C:/Users/renan.bernardo/Desktop/Estagio/app/controllers/users_controller.rb</file>
+            <file>file:/C:/Users/renan.bernardo/Desktop/Estagio/app/views/avisos/entrada_incorreta.html.erb</file>
+            <file>file:/C:/Users/renan.bernardo/Desktop/Estagio/app/controllers/relatorios_controller.rb</file>
+            <file>file:/C:/Users/renan.bernardo/Desktop/Estagio/app/helpers/conceitos_helper.rb</file>
+            <file>file:/C:/Users/renan.bernardo/Desktop/Estagio/app/controllers/conceitos_controller.rb</file>
+            <file>file:/C:/Users/renan.bernardo/Desktop/Estagio/app/mailers/user_mailer.rb</file>
+            <file>file:/C:/Users/renan.bernardo/Desktop/Estagio/app/views/devise/registrations/new.html.erb</file>
+            <file>file:/C:/Users/renan.bernardo/Desktop/Estagio/app/views/layouts/application.html.erb</file>
+            <file>file:/C:/Users/renan.bernardo/Desktop/Estagio/app/views/matriculas/_form.html.erb</file>
+            <file>file:/C:/Users/renan.bernardo/Desktop/Estagio/app/views/periodos/_form.html.erb</file>
+            <file>file:/C:/Users/renan.bernardo/Desktop/Estagio/config/routes.rb</file>
+            <file>file:/C:/Users/renan.bernardo/Desktop/Estagio/app/views/users/edit.html.erb</file>
+            <file>file:/C:/Users/renan.bernardo/Desktop/Estagio/app/controllers/application_controller.rb</file>
+        </group>
+    </open-files>
+</project-private>
