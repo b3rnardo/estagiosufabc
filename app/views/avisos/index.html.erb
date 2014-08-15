@@ -9,6 +9,13 @@
   <% end %>
 
 <h1>Avisos da secretaria</h1>
+
+<% if current_usuario.tipo == "Secretaria" or current_usuario.tipo == "Administrador" %>
+
+    <%= link_to 'Novo aviso', new_aviso_path %>
+    <br>
+<% end %>
+
 <% if @avisos.blank? %>
   <p>As secretarias não passaram nenhum aviso para esse período letivo.</p>
 
@@ -17,14 +24,14 @@
 <h3> <%=aviso.titulo%></h3>
 <%=aviso.detalhes%>
 </br><span><b>postado por  <%= aviso.autor %> em <%= aviso.updated_at.to_s_br %> </b></span>
-  <% if current_usuario.nome == aviso.autor %> |
+  <% if current_usuario.nome == aviso.autor or current_usuario.tipo == "Administrador"%> |
   
         <%= link_to 'Editar', edit_aviso_path(aviso) %>
         <%= link_to 'Deletar', :controller => 'avisos', :action => 'delete', :id => aviso.id%>
 
   <%end%> 	
 <br>
-
+<br>
 <% end %>
 
 <br />
@@ -43,8 +50,3 @@
 <%end%>
 <br>
 
-<% if current_usuario.tipo == "Secretaria" or current_usuario.tipo == "Administrador" %>
-
-    <%= link_to 'Novo aviso', new_aviso_path %>
-
-<% end %>

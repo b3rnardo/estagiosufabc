@@ -19,16 +19,36 @@ class UserMailer < ActionMailer::Base
     
     @link = 'http://cmcc-bcc.ufabc.edu.br/estagios/conceitos/dssi/'+@periodo.id.to_s+'/'+@periodo.registrador_ci.to_s
 
-    mail(:to => "bernardo_mec@live.com", :subject => t(:lancamento_conceito))
+    mail(:to => "dssi.prograd@ufabc.edu.br", :subject => t(:lancamento_conceito))
   end
   
-  def relatorio_matriculas(email,disciplina,remetente)
-    
+  def relatorio_matriculas(email,disciplina,remetente)    
     @remetente = remetente
     @email = email
     @disciplina = disciplina
     @periodo = Periodo.find(@disciplina.periodo_id)
-    @link = 'http://cmcc-bcc.ufabc.edu.br/estagios/relatorios/view/'+@periodo.id.to_s+'/'+@disciplina.codigo.to_s
+
+    case @disciplina.curso
+      when t(:lic_ciencia_bio)
+        @curso = "bio"
+        
+      when t(:lic_filosofia)
+        @curso = "filo"
+        
+      when t(:lic_fisica)
+        @curso = "fis"
+        
+      when t(:lic_matematica)
+        @curso = "mat"
+        
+      when t(:lic_quimica)
+        @curso = "qui"      
+    end    
+    
+    
+    @link = 'http://cmcc-bcc.ufabc.edu.br/estagios/relatorios/view/'+@periodo.id.to_s+'/'+@curso+'/'+@disciplina.codigo.to_s
+
+    
     mail(:to => @email, :subject => "Analises de matricula")
   end
   

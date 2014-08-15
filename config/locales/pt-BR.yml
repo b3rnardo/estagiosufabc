@@ -298,7 +298,7 @@ pt-BR:
                     cadastro_matricula: não pode ser maior que o campo "fim do período de edição de disciplinas".
                 reajuste_inicio:
                     periodo_reajuste_invalido: não pode ser maior que o campo "fim do período de reajuste".
-                    matricula_reajuste: não pode ser maior que o campo "fim do período de matrícula".
+                    matricula_reajuste: não pode ser menor que o campo "fim do período de matrícula".
                 cadastro_inicio:
                     periodo_cadastro_invalido: não pode ser maior que o campo "fim do período de edição de disciplinas".
           mudanca:

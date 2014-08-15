@@ -3,6 +3,7 @@ class Disciplina < ActiveRecord::Base
   has_many :matriculas
   attr_accessible :codigo, :curso, :dia, :horario_fim, :horario_inicio, :nome, :turno
   
+  validates_size_of :codigo, :is => 6
   validates :codigo, :curso, :presence => true
   validate :checa_horarios
   

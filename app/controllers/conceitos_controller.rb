@@ -91,9 +91,6 @@ end
                   matricula.status = 3
                   matricula.numero_ci = @periodo.registrador_ci
                   matricula.save
-                  #@nome = retorna_nome_aluno(matricula.aluno_id)
-                  #@aux = [retorna_nome_aluno(matricula.aluno_id),retorna_ra(matricula.aluno_id),retorna_nome_disciplina(matricula.disciplina_id),retorna_codigo(matricula.disciplina_id),matricula.conceito,matricula.horas]
-                  #@tabela.append(@aux)
               end
       
           end

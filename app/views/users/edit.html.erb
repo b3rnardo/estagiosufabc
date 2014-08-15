@@ -31,7 +31,7 @@
   </div>
   <div class="field">
     <%= f.label :centro %><br />
-    <%= f.select :centro, [["CMCC"],["CCNH"],["Não informado"]] %>
+    <%= f.select :centro, [["CMCC"],["CCNH"],[""]] %>
   </div>
 
   <div class="field">
@@ -42,3 +42,4 @@
     <%= f.submit "Atualizar" %>
   </div>
 <% end %>
+<p><font color="red">Atenção: O e-mail utilizado deve ser @ufabc.edu.br ou @aluno.ufabc.edu.br</font></p>

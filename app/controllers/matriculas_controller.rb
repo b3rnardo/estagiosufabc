@@ -61,7 +61,7 @@ class MatriculasController < ApplicationController
         end      
     
     
-    @disciplinas = Disciplina.find(:all, :conditions => {:periodo_id => @periodo.id})
+    @disciplinas = Disciplina.find(:all, :conditions => {:periodo_id => @periodo.id}, :order => "nome")
   end
   
   def index

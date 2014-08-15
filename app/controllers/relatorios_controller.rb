@@ -8,10 +8,26 @@ class RelatoriosController < ApplicationController
       return
     end
     @lista_recebida = params[:lista].to_a
-    @disciplina = Disciplina.find(params[:id])
-    @periodo = @disciplina.periodo_id
-    @emails = @lista_recebida[0][1].split(';') 
     
+    case params[:curso]
+      when "bio"       
+        @curso = t(:lic_ciencia_bio)
+        
+      when "filo"        
+        @curso = t(:lic_filosofia)
+        
+      when "fis"        
+        @curso = t(:lic_fisica)
+        
+      when "mat"        
+        @curso = t(:lic_matematica)
+        
+      when "qui"        
+        @curso = t(:lic_quimica)     
+    end
+    
+    @disciplina = Disciplina.find(:first, :conditions => {:periodo_id => params[:periodo], :curso => @curso, :codigo => params[:codigo]})
+    @emails = @lista_recebida[0][1].split(';')     
     @emails.each do |email|
 
       UserMailer.relatorio_matriculas(email,@disciplina,Usuario.find(current_usuario.id)).deliver
@@ -23,18 +39,37 @@ class RelatoriosController < ApplicationController
   end
   
   def view
+    @curso = params[:curso]
     
-    @disciplinas = Disciplina.find(:all, :conditions =>{:codigo => params[:codigo], :periodo_id => params[:periodo]})
+    case @curso
+      when "bio"       
+        @retornar = t(:lic_ciencia_bio)
+        
+      when "filo"        
+        @retornar = t(:lic_filosofia)
+        
+      when "fis"        
+        @retornar = t(:lic_fisica)
+        
+      when "mat"        
+        @retornar = t(:lic_matematica)
+        
+      when "qui"        
+        @retornar = t(:lic_quimica)     
+    end
+    
+    @disciplinas = Disciplina.find(:all, :conditions =>{:codigo => params[:codigo], :periodo_id => params[:periodo], :curso => @retornar})
     @ids = [nil]
     @disciplinas.each do |disciplina|
       @ids.append(disciplina.id)
     end
     
     @periodo = Periodo.find(params[:periodo])
-    @matriculas = Matricula.find(:all, :conditions =>{:disciplina_id => @ids}, :order => "aluno_id")
+    @matriculas = Matricula.find(:all, :conditions =>{:disciplina_id => @ids, :status => [-1,1,2,3]}, :order => "aluno_id")
     @agora = Time.now
     
   end
+  
   
   def index
     unless possui_acesso?()
@@ -53,7 +88,7 @@ class RelatoriosController < ApplicationController
     unless possui_acesso?()
       return
     end
-    $disciplinas_amostradas = [nil]
+    $disciplinas_amostradas = [[nil,nil]]
     
     @periodo = Periodo.find(params[:id])
     unless @periodo.blank?

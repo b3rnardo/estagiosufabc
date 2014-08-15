@@ -9,18 +9,20 @@ class AvisosController < ApplicationController
     end
     
     def realizou_matricula()
+      #esse método retorna verdadeiro se o aluno realizou matrícula no quadrimestre atual
       @periodo = Periodo.find(:last)
+      
       unless @periodo.blank?
       
-      @matriculas = Matricula.find(:all, :conditions => {:aluno_id => current_usuario.id, :periodo_id => @periodo.id})
+          @matriculas = Matricula.find(:all, :conditions => {:aluno_id => current_usuario.id, :periodo_id => @periodo.id})
       
-      if @matriculas.blank?
-          #não realizou matrícula no período atual
-          return false
-      else
-          #realizou a matrícula no período atual
-          return true
-      end
+          if @matriculas.blank?
+              #não realizou matrícula no período atual
+              return false
+          else
+              #realizou a matrícula no período atual
+              return true
+          end
         
       else
           return false
@@ -30,7 +32,7 @@ class AvisosController < ApplicationController
   
 
   def index
-    
+    #apresenta na view todos os avisos do último período cadastrado
     @periodo = Periodo.find(:last)
     unless @periodo.blank?
     
@@ -44,6 +46,7 @@ class AvisosController < ApplicationController
         end
     @avisos = Aviso.find(:all, :conditions => {:periodo_id => @periodo.id})
     else
+      #para evitar erros quando nenhum período tiver sido cadastrado
       @avisos = Aviso.all
     end
     respond_to do |format|

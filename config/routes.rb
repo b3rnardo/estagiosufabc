@@ -15,6 +15,7 @@ scope 'estagios/' do
   end
       match 'home', :controller => 'avisos', :action => 'home'
       match'/confirm', :controller => 'avisos', :action => 'confirm'
+
     
       match '/cadastro', :controller => 'matriculas', :action => 'cadastro'
       match '/cadastro/create', :controller => 'matriculas', :action => 'create'
@@ -37,8 +38,8 @@ scope 'estagios/' do
       
       match "relatorios/", :controller => 'relatorios', :action => 'index'
       match "relatorios/show/:id", :controller => 'relatorios', :action => 'show'
-      match "relatorios/view/:periodo/:codigo", :controller => 'relatorios', :action => 'view', :format => 'pdf'
-      match "relatorios/envio/", :controller => 'relatorios', :action => 'envio'
+      match "relatorios/view/:periodo/:curso/:codigo", :controller => 'relatorios', :action => 'view', :format => 'pdf'
+      match "relatorios/envio/:periodo/:curso/:codigo", :controller => 'relatorios', :action => 'envio'
       
       match "conceitos/", :controller => 'conceitos', :action => 'index'
       match "conceitos/show/:id", :controller => 'conceitos', :action => 'show'

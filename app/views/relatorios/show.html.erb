@@ -14,14 +14,16 @@
 
   <% @disciplinas.each do |disciplina| %>
   
-  <%= form_for(:lista, :url => {:controller => 'relatorios', :action => 'envio', :id => disciplina.id}) do |f| %>
-  <% if filtro_relatorio(disciplina.codigo) %>
+  <%= form_for(:lista, :url => {:controller => 'relatorios', :action => 'envio', :periodo => disciplina.periodo_id, :curso => retorna_abrev_curso(disciplina.id), :codigo => disciplina.codigo}) do |f| %>
+  <% if filtro_relatorio(disciplina.id) %>
   
   <% if filtro_centro(disciplina.id) %>
     <tr>
         <td><%=disciplina.codigo%></td>
         <td><%=disciplina.nome%></td>
-        <td><%= link_to "Avançar", :controller => 'relatorios', :action => 'view', :periodo => disciplina.periodo_id, :codigo => disciplina.codigo%></td>
+
+        <td><%= link_to "Avançar", :controller => 'relatorios', :action => 'view', :periodo => disciplina.periodo_id,:curso => retorna_abrev_curso(disciplina.id), :codigo => disciplina.codigo%></td>
+
         <td><%= f.text_field :emails%></td>        
         <td><%= f.submit "enviar emails"%></td>
     

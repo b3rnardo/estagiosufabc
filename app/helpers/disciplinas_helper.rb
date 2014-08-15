@@ -7,13 +7,13 @@ module DisciplinasHelper
     
     if current_usuario.centro == "CMCC"
       
-        if @disciplina.curso == t(:lic_matematica) #"Licenciatura em matemática"            
+        if @disciplina.curso == t(:lic_matematica) or @disciplina.curso == "CMCC" #"Licenciatura em matemática"            
             @retornar = true
         
         end
     elsif current_usuario.centro == "CCNH"
       
-        if @disciplina.curso == t(:lic_ciencia_bio) or @disciplina.curso == t(:lic_fisica) or @disciplina.curso == t(:lic_quimica) or @disciplina.curso == t(:lic_filosofia) #Licenciatura em ciencias biologicas, física, química ou filosofia
+        if @disciplina.curso == t(:lic_ciencia_bio) or @disciplina.curso == t(:lic_fisica) or @disciplina.curso == t(:lic_quimica) or @disciplina.curso == t(:lic_filosofia) or @disciplina.curso == "CCNH" #Licenciatura em ciencias biologicas, física, química ou filosofia
             @retornar = true
         end
 
